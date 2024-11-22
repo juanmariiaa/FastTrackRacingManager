@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="555ec4b8-47b1-41a2-a8b8-84e67cdd7335" name="Changes" comment="" />
+    <list default="true" id="555ec4b8-47b1-41a2-a8b8-84e67cdd7335" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/juanmariiaa/App.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/juanmariiaa/PrimaryController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/juanmariiaa/SecondaryController.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +17,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2pCXCLTxaDEAppMuM109jHuTqvP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -41,7 +49,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1732270904634</updated>
-      <workItem from="1732270906571" duration="323000" />
+      <workItem from="1732270906571" duration="589000" />
     </task>
     <servers />
   </component>
