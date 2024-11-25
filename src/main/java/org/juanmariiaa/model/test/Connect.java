@@ -9,6 +9,6 @@ public class Connect {
         XMLManager.writeXML(co,"connection.xml");
 
         ConnectionProperties c = XMLManager.readXML(new ConnectionProperties(),"connection.xml");
-        System.out.println(c);
+        System.out.println(c+"");
     }
 }
