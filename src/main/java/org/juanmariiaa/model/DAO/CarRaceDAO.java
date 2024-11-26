@@ -1,9 +1,7 @@
 package org.juanmariiaa.model.DAO;
 
 import org.juanmariiaa.model.connection.ConnectionMariaDB;
-import org.juanmariiaa.model.domain.CarRace;
-import org.juanmariiaa.model.domain.RacingTeam;
-import org.juanmariiaa.model.domain.User;
+import org.juanmariiaa.model.domain.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -19,6 +17,34 @@ public class CarRaceDAO {
     private final static String IS_TEAM_IN_CAR_RACE = "SELECT COUNT(*) FROM participation WHERE id_racingTeam = ? AND id_carRace = ?";
 
     private Connection conn;
+    private TeamRaceDAO teamRaceDAO;
+
+    public CarRaceDAO(Connection conn, TeamRaceDAO teamRaceDAO) {
+        this.conn = conn;
+        this.teamRaceDAO = teamRaceDAO;
+    }
+
+    public CarRaceDAO() {
+        this.conn = ConnectionMariaDB.getConnection();
+        this.teamRaceDAO = new TeamRaceDAO(conn);
+    }
+
+
+    public List<CarRace> findAll(int userId) throws SQLException {
+        List<CarRace> carRaces = new ArrayList<>();
+        try (PreparedStatement preparedStatement = conn.prepareStatement(FIND_ALL)) {
+            preparedStatement.setInt(1, userId);
+            try(ResultSet resultSet = preparedStatement.executeQuery()){
+                while (resultSet.next()) {
+                    CarRace carRace = carRaceEager(resultSet);
+                    carRaces.add(carRace);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return carRaces;
+    }
 
 
     public CarRace save(User user, CarRace carRace) throws SQLException {
@@ -61,6 +87,10 @@ public class CarRaceDAO {
     }
 
 
+    public List<RacingTeam> findTeamsByRaceId(int raceId) throws SQLException {
+        return teamRaceDAO.findTeamsByRaceId(raceId);
+    }
+
 
     public void addTeamToRace(int raceId, int racingTeamId) throws SQLException {
         try (PreparedStatement statement = conn.prepareStatement(ADD_TEAM_TO_CAR_RACE)) {
@@ -90,6 +120,16 @@ public class CarRaceDAO {
     }
 
 
+    private CarRace carRaceEager(ResultSet resultSet) throws SQLException {
+        CarRace carRace = new CarRace();
+        carRace.setId(resultSet.getInt("id"));
+        carRace.setName(resultSet.getString("name"));
+        carRace.setLocation(resultSet.getString("location"));
+        carRace.setCity(resultSet.getString("city"));
+        carRace.setDate(resultSet.getDate("date"));
+        carRace.setTeams(findTeamsByRaceId(carRace.getId()));
+        return carRace;
+    }
 
 
 
