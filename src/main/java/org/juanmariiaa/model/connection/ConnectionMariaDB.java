@@ -10,9 +10,7 @@ public class ConnectionMariaDB {
     private static ConnectionMariaDB _instance;
     private static Connection conn;
 
-    /**
-     * Constructor to initialize a new MariaDB connection using properties from an XML file.
-     */
+
     public ConnectionMariaDB() {
         ConnectionProperties properties = (ConnectionProperties) XMLManager.readXML(new ConnectionProperties(), FILE);
 
@@ -24,11 +22,6 @@ public class ConnectionMariaDB {
         }
     }
 
-    /**
-     * Get a connection instance. If no instance exists, a new one is created.
-     *
-     * @return Connection instance
-     */
     public static Connection getConnection() {
         if (_instance == null) {
             _instance = new ConnectionMariaDB();
