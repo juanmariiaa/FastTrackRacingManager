@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="411.0" prefWidth="308.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.LoginController">
+   <children>
+      <Text layoutX="33.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign in" wrappingWidth="138.234375">
+         <font>
+            <Font name="Arial Bold" size="27.0" />
+         </font>
+      </Text>
+      <Text layoutX="33.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Access to your carRace manager">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <TextField fx:id="tfUser" layoutX="20.0" layoutY="109.0" prefHeight="39.0" prefWidth="271.0" promptText="Username" style="-fx-background-radius: 20;" text="juan" />
+      <PasswordField fx:id="tfPass" layoutX="19.0" layoutY="170.0" prefHeight="39.0" prefWidth="271.0" promptText="Password" style="-fx-background-radius: 20;" text="41716Juan-" />
+      <Button layoutX="20.0" layoutY="239.0" mnemonicParsing="false" onAction="#login" prefHeight="39.0" prefWidth="271.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Sign In" textAlignment="CENTER" textFill="WHITE">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Text layoutX="115.0" layoutY="306.0" strokeType="OUTSIDE" strokeWidth="0.0" text="if you are new" wrappingWidth="79.203125" />
+      <Button layoutX="18.0" layoutY="322.0" mnemonicParsing="false" onAction="#switchToRegister" prefHeight="40.0" prefWidth="272.0" style="-fx-background-radius: 20; -fx-background-color: #969696;" text="Sign Up" textAlignment="CENTER" textFill="WHITE">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Separator layoutX="21.0" layoutY="253.0" prefHeight="97.0" prefWidth="79.0" />
+      <Separator layoutX="206.0" layoutY="253.0" prefHeight="97.0" prefWidth="79.0" />
+   </children>
+</Pane>
