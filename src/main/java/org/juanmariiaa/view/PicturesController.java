@@ -40,7 +40,7 @@ public class PicturesController {
 
     public void loadPictures(CarRace carRace) throws SQLException {
         this.selectedCarRace = carRace;
-        picturesTilePane.getChildren().clear(); // Clear existing pictures
+        picturesTilePane.getChildren().clear();
         List<Picture> pictures = pictureDAO.getPicturesByRaceId(carRace.getId());
 
         for (Picture picture : pictures) {
@@ -49,7 +49,7 @@ public class PicturesController {
             imageView.setFitWidth(100);
 
             imageView.setOnMouseClicked(event -> handlePictureSelection(picture));
-            setMargin(imageView, new Insets(5)); // Add margin around each image
+            setMargin(imageView, new Insets(5));
 
             picturesTilePane.getChildren().add(imageView);
         }
@@ -94,16 +94,11 @@ public class PicturesController {
 
     private void showLargePictureView(Picture picture) {
         Stage stage = new Stage();
-        // Create an ImageView with the actual image size
         ImageView imageView = new ImageView(new Image(new ByteArrayInputStream(picture.getImageData())));
         imageView.setPreserveRatio(true); // Maintain aspect ratio
-        // Create a BorderPane to center the ImageView
         BorderPane borderPane = new BorderPane(imageView);
-        // Create a Scene with the BorderPane
         Scene scene = new Scene(borderPane);
-        // Set the stage title
         stage.setTitle("Selected Picture");
-        // Set the scene and show the stage
         stage.setScene(scene);
         stage.show();
     }
@@ -130,22 +125,17 @@ public class PicturesController {
     @FXML
     public void switchToShowTeams() {
         try {
-            // Cargar el archivo FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("showTeams.fxml"));
-            Parent root = loader.load(); // Carga la interfaz de "showTeams.fxml"
+            Parent root = loader.load();
 
-            // Obtener el controlador y pasarle los datos necesarios
             ShowTeamsController controller = loader.getController();
-            controller.loadTeams(selectedCarRace); // Asegúrate de que `selectedCarRace` esté correctamente inicializado
+            controller.loadTeams(selectedCarRace);
 
-            // Obtener la referencia a la ventana actual (Stage)
-            Stage stage = (Stage) somePane.getScene().getWindow(); // Reemplaza `somePane` con el nodo adecuado, si es necesario
-            stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow();
+            stage.getScene().setRoot(root);
 
         } catch (IOException e) {
-            // Imprimir el error para el seguimiento
             e.printStackTrace();
-            // O también podrías mostrar un mensaje de error al usuario si prefieres
             Alert alert = new Alert(Alert.AlertType.ERROR, "Hubo un error al cargar la vista de los equipos.", ButtonType.OK);
             alert.showAndWait();
         }
@@ -156,15 +146,12 @@ public class PicturesController {
     @FXML
     private void switchToSelectedRace() {
         try {
-            // Cargar el archivo FXML para SelectedTournament
             FXMLLoader loader = new FXMLLoader(getClass().getResource("selectedRace.fxml"));
-            Parent root = loader.load(); // Carga la interfaz de "selectedRace.fxml"
+            Parent root = loader.load();
 
-            // Obtener el controlador de la vista de SelectedTournament
             SelectedRaceController controller = loader.getController();
-            controller.initialize(selectedCarRace); // Pasar los datos necesarios al controlador
+            controller.initialize(selectedCarRace);
 
-            // Cambiar el contenido de la escena principal
             Stage stage = (Stage) somePane.getScene().getWindow();
             stage.getScene().setRoot(root);
 
@@ -176,17 +163,14 @@ public class PicturesController {
     @FXML
     public void switchToGrid() {
         try {
-            // Cargar el archivo FXML para Grid
             FXMLLoader loader = new FXMLLoader(getClass().getResource("grid.fxml"));
-            Parent root = loader.load(); // Carga la interfaz de "grid.fxml"
+            Parent root = loader.load();
 
-            // Obtener el controlador y pasarle datos necesarios
             GridController controller = loader.getController();
-            controller.loadGridData(selectedCarRace); // Llamar al método adecuado para cargar los datos
+            controller.loadGridData(selectedCarRace);
 
-            // Cambiar el contenido de la escena principal
-            Stage stage = (Stage) somePane.getScene().getWindow(); // `somePane` es un nodo actual de la escena
-            stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow();
+            stage.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
         }

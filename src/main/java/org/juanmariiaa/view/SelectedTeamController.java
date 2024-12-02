@@ -29,11 +29,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Controller class for displaying and managing details of a selected team.
- * This controller handles updating team details, displaying associated drivers
- * and creating new drivers for this selected tournament.
- */
+
 public class SelectedTeamController {
 
     @FXML

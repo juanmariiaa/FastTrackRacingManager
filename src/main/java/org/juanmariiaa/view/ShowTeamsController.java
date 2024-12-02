@@ -27,9 +27,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * Controller class that display all the Teams associated with the selectedTournament.
- */
+
 public class ShowTeamsController implements Initializable {
 
     @FXML
@@ -41,16 +39,13 @@ public class ShowTeamsController implements Initializable {
     @FXML
     private TableColumn<RacingTeam, String> institutionColumn;
     @FXML
-    private Pane somePane; // Este es el Pane donde se cargará el nuevo contenido
+    private Pane somePane;
     private User currentUser;
     private ObservableList<RacingTeam> racingTeams;
     private final RacingTeamDAO racingTeamDAO = new RacingTeamDAO();
     private CarRace selectedCarRace;
 
-    /**
-     * Initializes the table view with the current user's data.
-     *
-     */
+
     public void initialize(URL location, ResourceBundle resources) {
         currentUser = SingletonUserSession.getCurrentUser();
         tableView.setEditable(true);
@@ -59,9 +54,7 @@ public class ShowTeamsController implements Initializable {
         institutionColumn.setCellValueFactory(team -> new SimpleStringProperty(team.getValue().getInstitution()));
     }
 
-    /**
-     * Deletes the selected team from the table and the database.
-     */
+
     @FXML
     private void deleteSelected() {
         RacingTeam selectedT = (RacingTeam) tableView.getSelectionModel().getSelectedItem();
@@ -81,11 +74,7 @@ public class ShowTeamsController implements Initializable {
     }
 
 
-    /**
-     * Loads the teams associated with the given tournament.
-     *
-     * @param carRace The tournament for which the teams are to be loaded.
-     */
+
     public void loadTeams(CarRace carRace) {
         this.selectedCarRace = carRace;
         List<RacingTeam> racingTeams = racingTeamDAO.findTeamsByRace(carRace.getId());
@@ -117,15 +106,12 @@ public class ShowTeamsController implements Initializable {
     @FXML
     private void switchToPictures() {
         try {
-            // Cargar el archivo FXML de la vista de "PicturesTournament"
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pictures.fxml"));
-            Parent root = loader.load(); // Carga la interfaz de "pictures.fxml"
+            Parent root = loader.load();
 
-            // Obtener el controlador de la vista de "PicturesTournament"
             PicturesController controller = loader.getController();
-            controller.loadPictures(selectedCarRace); // Cargar los datos para la vista de Pictures
+            controller.loadPictures(selectedCarRace);
 
-            // Cambiar el contenido de la escena principal
             Stage stage = (Stage) somePane.getScene().getWindow();
             stage.getScene().setRoot(root);
 
@@ -139,15 +125,12 @@ public class ShowTeamsController implements Initializable {
     @FXML
     private void switchToSelectedRace() {
         try {
-            // Cargar el archivo FXML para SelectedTournament
             FXMLLoader loader = new FXMLLoader(getClass().getResource("selectedRace.fxml"));
-            Parent root = loader.load(); // Carga la interfaz de "selectedRace.fxml"
+            Parent root = loader.load();
 
-            // Obtener el controlador de la vista de SelectedTournament
             SelectedRaceController controller = loader.getController();
-            controller.initialize(selectedCarRace); // Pasar los datos necesarios al controlador
+            controller.initialize(selectedCarRace);
 
-            // Cambiar el contenido de la escena principal
             Stage stage = (Stage) somePane.getScene().getWindow();
             stage.getScene().setRoot(root);
 
@@ -175,17 +158,14 @@ public class ShowTeamsController implements Initializable {
     @FXML
     public void switchToGrid() {
         try {
-            // Cargar el archivo FXML para Grid
             FXMLLoader loader = new FXMLLoader(getClass().getResource("grid.fxml"));
-            Parent root = loader.load(); // Carga la interfaz de "grid.fxml"
+            Parent root = loader.load();
 
-            // Obtener el controlador y pasarle datos necesarios
             GridController controller = loader.getController();
-            controller.loadGridData(selectedCarRace); // Llamar al método adecuado para cargar los datos
+            controller.loadGridData(selectedCarRace);
 
-            // Cambiar el contenido de la escena principal
-            Stage stage = (Stage) somePane.getScene().getWindow(); // `somePane` es un nodo actual de la escena
-            stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow();
+            stage.getScene().setRoot(root);
         } catch (IOException e) {
             e.printStackTrace();
         }

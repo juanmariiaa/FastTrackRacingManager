@@ -24,13 +24,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-/**
- * This class is responsible for creating a new team.
- * It retrieves the input fields' values, validates them, and then creates a new Team object
- * associated with the selectedTournament.
- *
- * @throws SQLException if an error occurs while creating the team
- */
+
 public class CreateTeamController implements Initializable {
 
     @FXML
@@ -56,7 +50,6 @@ public class CreateTeamController implements Initializable {
         this.selectedCarRace = selectedCarRace;
     }
 
-    // Add this setter method for teamDAO
     public void setTeamDAO(RacingTeamDAO racingTeamDAO) {
         this.racingTeamDAO = racingTeamDAO;
     }
@@ -110,7 +103,7 @@ public class CreateTeamController implements Initializable {
             newRacingTeam.setName(name);
             newRacingTeam.setCity(city);
             newRacingTeam.setInstitution(institution);
-            newRacingTeam.setImageData(logoImageData); // Set the image data
+            newRacingTeam.setImageData(logoImageData);
 
             if (selectedCarRace == null) {
                 Utils.showPopUp("Error", null, "Please select a tournament.", Alert.AlertType.ERROR);

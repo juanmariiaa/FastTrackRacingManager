@@ -10,23 +10,13 @@ import org.juanmariiaa.utils.Utils;
 
 import java.io.IOException;
 import java.sql.SQLException;
-/**
- * Controller for the login functionality in the application.
- */
+
 public class LoginController {
 
     @FXML
     private TextField tfUser;
     @FXML
     private PasswordField tfPass;
-
-    /**
-     * Handles the login process when the user clicks the login button.
-     * Validates the entered credentials and sets the user session if successful.
-     *
-     * @throws SQLException If there's an issue with the database query.
-     * @throws IOException  If there's an issue switching to the home view.
-     */
     @FXML
     private void login() throws SQLException, IOException {
         String username = tfUser.getText().trim();
@@ -39,7 +29,6 @@ public class LoginController {
             alert.setContentText("Please, complete all fields to continue.");
             alert.showAndWait();
         } else {
-            // Hash the password
             String hashedPassword = Utils.hashPassword(password);
 
             UserDAO uDAO = new UserDAO();
@@ -48,7 +37,6 @@ public class LoginController {
             if (result != null && !result.isEmpty()) {
                 int id = Integer.parseInt(result);
                 SingletonUserSession.login(id, username);
-                //logged in
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("SUCCESS");
                 alert.setHeaderText("You are logged in.");

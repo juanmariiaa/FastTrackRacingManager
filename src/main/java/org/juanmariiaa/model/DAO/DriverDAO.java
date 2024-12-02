@@ -117,14 +117,13 @@ public class DriverDAO {
         }
     }
 
-    // Método nuevo para verificar si el DNI ya existe
     public boolean dniExists(String dni) {
         boolean exists = false;
         try (PreparedStatement statement = conn.prepareStatement(CHECK_DNI_EXISTS)) {
             statement.setString(1, dni);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
-                    exists = resultSet.getInt(1) > 0; // Si el conteo es mayor que 0, el DNI ya existe
+                    exists = resultSet.getInt(1) > 0;
                 }
             }
         } catch (SQLException e) {

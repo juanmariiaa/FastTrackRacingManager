@@ -8,10 +8,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-/**
- * The main application class for the tournament management system.
- * This class initializes and manages the main stage and scenes.
- */
+
 public class App extends Application {
     private static Scene scene;
     private static Stage primaryStage;

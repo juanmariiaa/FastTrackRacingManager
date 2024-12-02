@@ -11,21 +11,19 @@ import org.juanmariiaa.utils.Utils;
 import java.io.IOException;
 import java.sql.SQLException;
 
-/**
- * Controller for user registration in the app.
- */
+
 public class RegisterController {
 
     @FXML
-    private TextField tfDni; // Text field for entering the DNI
+    private TextField tfDni;
     @FXML
-    private TextField tfName; // Text field for entering the user's name
+    private TextField tfName;
     @FXML
-    private TextField tfSurname; // Text field for entering the user's surname
+    private TextField tfSurname;
     @FXML
-    private TextField tfUsername; // Text field for entering the desired username
+    private TextField tfUsername;
     @FXML
-    private PasswordField tfPassword; // Password field for entering the user's password
+    private PasswordField tfPassword;
 
     UserDAO userDAO = new UserDAO();
 
@@ -35,9 +33,7 @@ public class RegisterController {
         addUser();
     }
 
-    /**
-     * Adds a new user to the system based on the entered information.
-     */
+
     @FXML
     private void addUser() {
         App a = new App();
@@ -63,7 +59,6 @@ public class RegisterController {
                 } else if (userDAO.findByUsername(username) != null) {
                     Utils.showPopUp("Error", "Username already exists", "Please choose another username.", Alert.AlertType.ERROR);
                 } else {
-                    // Hashing the password before saving
                     String hashedPassword = Utils.hashPassword(password);
                     User user = new User(dni, name, surname, username, hashedPassword);
                     userDAO.save(user);
@@ -87,22 +82,12 @@ public class RegisterController {
         }
     }
 
-    /**
-     * Validates the format of the entered DNI.
-     *
-     * @param dni The entered DNI.
-     * @return True if the DNI format is valid, false otherwise.
-     */
+
     private boolean isValidDni(String dni) {
         return dni.matches("^\\d{8}[a-zA-Z]$");
     }
 
-    /**
-     * Validates the complexity of the entered password.
-     *
-     * @param password The entered password.
-     * @return True if the password meets complexity requirements, false otherwise.
-     */
+
     public static boolean isValidPassword(String password) {
         return password.length() >= 8 &&
                 password.matches(".*[A-Z].*") &&

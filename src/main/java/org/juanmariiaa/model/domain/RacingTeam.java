@@ -17,8 +17,8 @@ public class RacingTeam {
         this.name = "";
         this.city = "";
         this.institution = "";
-        this.drivers = new ArrayList<>(); // Initialize participants list
-        this.imageData = new byte[0]; // Initialize imageData
+        this.drivers = new ArrayList<>();
+        this.imageData = new byte[0];
     }
 
     public RacingTeam(int id, String name, String city, String institution, List<Driver> drivers, byte[] imageData) {
@@ -26,8 +26,8 @@ public class RacingTeam {
         this.name = name;
         this.city = city;
         this.institution = institution;
-        this.drivers = drivers; // Initialize participants list
-        this.imageData = imageData; // Initialize imageData
+        this.drivers = drivers;
+        this.imageData = imageData;
     }
 
     public int getId() {

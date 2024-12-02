@@ -23,9 +23,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * Controller class that display all the Tournament associated with the currentUser.
- */
+
 public class MyRacesController implements Initializable {
     @FXML
     private TableView<CarRace> tableView;
@@ -43,12 +41,6 @@ public class MyRacesController implements Initializable {
     private ObservableList<CarRace> carRaces;
     private CarRaceDAO carRaceDAO = new CarRaceDAO();
 
-    /**
-     * Initializes the controller, and display all the race details.
-     *
-     * @param location  The location used to resolve relative paths for the root object.
-     * @param resources The resources used to localize the root object.
-     */
     public void initialize(URL location, ResourceBundle resources) {
         int userId = SingletonUserSession.getCurrentUser().getId();
 
@@ -71,10 +63,7 @@ public class MyRacesController implements Initializable {
         columnDate.setCellValueFactory(race -> new SimpleStringProperty(race.getValue().getDate()));
     }
 
-    /**
-     * Handles the selection of a race.
-     * Opens the details view for the selected race.
-     */
+
     @FXML
     private void selectTournament() {
         CarRace selectedCarRace = tableView.getSelectionModel().getSelectedItem();
@@ -99,9 +88,7 @@ public class MyRacesController implements Initializable {
         }
     }
 
-    /**
-     * Deletes the selected race.
-     */
+
     @FXML
     private void deleteSelected() {
         CarRace selectedT = tableView.getSelectionModel().getSelectedItem();

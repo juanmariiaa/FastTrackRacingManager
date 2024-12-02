@@ -20,13 +20,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-/**
- * This class is responsible for creating a new participant.
- * It retrieves the input fields' values, validates them, and then creates a new Participant object
- * associated with the selectedTeam.
- *
- * @throws SQLException if an error occurs while creating the team
- */
+
 public class CreateDriverController implements Initializable {
     @FXML
     private TextField dniField;

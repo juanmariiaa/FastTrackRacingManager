@@ -69,19 +69,15 @@ public class GridController {
 
         positionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         positionColumn.setOnEditCommit(event -> {
-            // Obtén el Driver de la fila editada
             Driver driver = event.getRowValue();
             try {
-                // Actualiza la posición con el nuevo valor
                 int newPosition = Integer.parseInt(event.getNewValue());
                 ObservableList<Driver> drivers = gridTableView.getItems();
 
                 if (newPosition > 0 && newPosition <= drivers.size()) {
-                    // Cambia la posición del Driver en la lista
-                    drivers.remove(driver); // Quita al driver de la lista
-                    drivers.add(newPosition - 1, driver); // Lo agrega en la nueva posición
+                    drivers.remove(driver);
+                    drivers.add(newPosition - 1, driver);
 
-                    // Actualiza la tabla para reflejar el cambio
                     gridTableView.setItems(FXCollections.observableArrayList(drivers));
                 } else {
                     showAlert("Error", "La posición debe estar entre 1 y " + drivers.size(), Alert.AlertType.ERROR);
@@ -108,9 +104,7 @@ public class GridController {
         });
     }
 
-    /**
-     * Obtiene el color asignado a un equipo o lo genera si no existe.
-     */
+
     private String getOrAssignTeamColor(String teamName) {
         if (!teamColors.containsKey(teamName)) {
             String randomColor = generateRandomColor();
@@ -273,7 +267,7 @@ public class GridController {
             ShowTeamsController controller = loader.getController();
             controller.loadTeams(selectedCarRace);
 
-            Stage stage = (Stage) somePane.getScene().getWindow(); // Asegúrate de reemplazar `somePane` con el nodo adecuado
+            Stage stage = (Stage) somePane.getScene().getWindow();
             stage.getScene().setRoot(root);
 
         } catch (IOException e) {

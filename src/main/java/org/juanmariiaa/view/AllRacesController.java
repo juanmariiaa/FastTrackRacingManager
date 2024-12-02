@@ -30,11 +30,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * Controller class for the All Tournaments view.
- * This class manages the display and editing of tournament information in a TableView,
- * as well as navigation to different views and delete of selected tournaments.
- */
+
 public class AllRacesController implements Initializable {
 
     @FXML
@@ -56,27 +52,19 @@ public class AllRacesController implements Initializable {
 
 
 
-    /**
-     * Initializes the controller class. This method is automatically called after the fxml file has been loaded.
-     * Also display all the tournaments related to the currentUser. This method also allows the user to update the fields
-     * associated with the tournament he wants to update.
-     *
-     * @param location  The location used to resolve relative paths for the root object, or null if the location is not known.
-     * @param resources The resources used to localize the root object, or null if the root object was not localized.
-     */
     public void initialize(URL location, ResourceBundle resources) {
         currentUser = SingletonUserSession.getCurrentUser();
         try {
             List<CarRace> carRaces = CarRaceDAO.build().findAll(currentUser.getId());
             this.carRaces = FXCollections.observableArrayList(carRaces);
         } catch (SQLException e) {
-            Utils.showPopUp("Error", null, "Error while fetching tournaments: " + e.getMessage(), Alert.AlertType.ERROR);
+            Utils.showPopUp("Error", null, "Error while fetching races: " + e.getMessage(), Alert.AlertType.ERROR);
             throw new RuntimeException(e);
         }
 
         tableView.setItems(this.carRaces);
         tableView.setEditable(true);
-        columnID.setCellValueFactory(tournament -> new SimpleIntegerProperty(tournament.getValue().getId()).asString());
+        columnID.setCellValueFactory(race -> new SimpleIntegerProperty(race.getValue().getId()).asString());
 
         columnName.setCellValueFactory(new PropertyValueFactory<>("name"));
         columnName.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -86,7 +74,7 @@ public class AllRacesController implements Initializable {
             try {
                 carRaceDAO.update(carRace);
             } catch (SQLException e) {
-                Utils.showPopUp("Error", null, "Error while updating tournament: " + e.getMessage(), Alert.AlertType.ERROR);
+                Utils.showPopUp("Error", null, "Error while updating race: " + e.getMessage(), Alert.AlertType.ERROR);
             }
             tableView.refresh();
         });
@@ -99,7 +87,7 @@ public class AllRacesController implements Initializable {
             try {
                 carRaceDAO.update(carRace);
             } catch (SQLException e) {
-                Utils.showPopUp("Error", null, "Error while updating tournament: " + e.getMessage(), Alert.AlertType.ERROR);
+                Utils.showPopUp("Error", null, "Error while updating race: " + e.getMessage(), Alert.AlertType.ERROR);
             }
             tableView.refresh();
         });
@@ -113,7 +101,7 @@ public class AllRacesController implements Initializable {
             try {
                 carRaceDAO.update(carRace);
             } catch (SQLException e) {
-                Utils.showPopUp("Error", null, "Error while updating tournament: " + e.getMessage(), Alert.AlertType.ERROR);
+                Utils.showPopUp("Error", null, "Error while updating race: " + e.getMessage(), Alert.AlertType.ERROR);
             }
             tableView.refresh();
         });
@@ -126,7 +114,7 @@ public class AllRacesController implements Initializable {
             try {
                 carRaceDAO.update(carRace);
             } catch (SQLException e) {
-                Utils.showPopUp("Error", null, "Error while updating tournament: " + e.getMessage(), Alert.AlertType.ERROR);
+                Utils.showPopUp("Error", null, "Error while updating race: " + e.getMessage(), Alert.AlertType.ERROR);
             }
             tableView.refresh();
         });
@@ -141,13 +129,13 @@ public class AllRacesController implements Initializable {
             try {
                 tableView.getItems().remove(selectedT);
                 carRaceDAO.delete(selectedT.getId());
-                Utils.showPopUp("DELETE", "Tournament deleted", "This tournament has been deleted.", Alert.AlertType.INFORMATION);
+                Utils.showPopUp("DELETE", "Tournament deleted", "This race has been deleted.", Alert.AlertType.INFORMATION);
             } catch (SQLException e) {
-                Utils.showPopUp("Error", null, "Error while deleting tournament: " + e.getMessage(), Alert.AlertType.ERROR);
+                Utils.showPopUp("Error", null, "Error while deleting race: " + e.getMessage(), Alert.AlertType.ERROR);
                 e.printStackTrace();
             }
         } else {
-            Utils.showPopUp("Error", null, "Please select a tournament to delete.", Alert.AlertType.ERROR);
+            Utils.showPopUp("Error", null, "Please select a race to delete.", Alert.AlertType.ERROR);
         }
     }
 
@@ -182,11 +170,7 @@ public class AllRacesController implements Initializable {
     private void switchToLogin() throws IOException {
         App.setRoot("login");
     }
-    /**
-     * Switches the scene to the view that shows teams in the selected tournament.
-     *
-     * @throws IOException if there is an error loading the view.
-     */
+
     @FXML
     private void switchToShowTeamsInSelectedTournament() throws IOException {
         CarRace selectedCarRace = tableView.getSelectionModel().getSelectedItem();
@@ -200,14 +184,10 @@ public class AllRacesController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } else {
-            Utils.showPopUp("Error", null, "Please select a tournament first!", Alert.AlertType.ERROR);
+            Utils.showPopUp("Error", null, "Please select a race first!", Alert.AlertType.ERROR);
         }
     }
-    /**
-     * Switches the scene to the view that allows adding or removing teams from the selected tournament.
-     *
-     * @throws IOException if there is an error loading the view.
-     */
+
     @FXML
     private void switchToAddRemoveTeamToTournament() throws IOException {
         CarRace selectedCarRace = tableView.getSelectionModel().getSelectedItem();
@@ -221,7 +201,7 @@ public class AllRacesController implements Initializable {
             stage.setScene(scene);
             stage.show();
         } else {
-            Utils.showPopUp("Error", null, "Please select a tournament first!", Alert.AlertType.ERROR);
+            Utils.showPopUp("Error", null, "Please select a race first!", Alert.AlertType.ERROR);
         }
     }
 }

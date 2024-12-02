@@ -8,7 +8,7 @@ public class CarRace {
     private String name;
     private String location;
     private String city;
-    private String date; // Cambiado de Date a String
+    private String date;
     private List<RacingTeam> racingTeams;
 
     public CarRace() {
@@ -16,7 +16,7 @@ public class CarRace {
         this.name = "";
         this.location = "";
         this.city = "";
-        this.date = null;  // Ahora es String, inicializado en null
+        this.date = null;
         this.racingTeams = null;
     }
 
@@ -25,7 +25,7 @@ public class CarRace {
         this.name = name;
         this.location = location;
         this.city = city;
-        this.date = date;  // Ahora se recibe un String para la fecha
+        this.date = date;
         this.racingTeams = racingTeams;
     }
 
@@ -97,7 +97,7 @@ public class CarRace {
                 ", name='" + name + '\'' +
                 ", location='" + location + '\'' +
                 ", city='" + city + '\'' +
-                ", date='" + date + '\'' +  // Cambiado para mostrar String
+                ", date='" + date + '\'' +
                 ", teams=" + racingTeams +
                 '}';
     }

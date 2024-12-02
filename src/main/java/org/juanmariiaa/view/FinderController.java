@@ -4,9 +4,7 @@ import javafx.fxml.FXML;
 
 import java.io.IOException;
 
-/**
- * Controller that links to the sites you can go.
- */
+
 public class FinderController {
 
     @FXML

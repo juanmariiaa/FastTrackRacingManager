@@ -27,11 +27,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-/**
- * Controller class for the All Participant view.
- * This class manages the display and editing of participation information in a TableView,
- * as well as navigation to different views and delete of selected tournaments.
- */
+
 public class AllDrivers implements Initializable {
 
     @FXML

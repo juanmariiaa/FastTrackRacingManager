@@ -5,9 +5,7 @@ import org.juanmariiaa.view.App;
 
 import java.io.IOException;
 
-/**
- * Controller that links to the sites you can go.
- */
+
 public class HomeController {
     @FXML
     private void switchToMyTournaments() throws IOException {

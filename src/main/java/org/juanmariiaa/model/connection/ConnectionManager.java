@@ -36,14 +36,12 @@ public class ConnectionManager {
     }
 
     private static Connection getMariaDBConnection() throws SQLException {
-        // Configuración para MariaDB
         ConnectionProperties properties = (ConnectionProperties) XMLManager.readXML(new ConnectionProperties(), "connection.xml");
         return DriverManager.getConnection(properties.getURL(), properties.getUser(), properties.getPassword());
     }
 
     private static Connection getSQLiteConnection() throws SQLException {
         try {
-            // Obtener ruta del archivo en resources
             var resource = ConnectionManager.class.getClassLoader().getResource("car_race.sqlite");
             if (resource == null) {
                 throw new RuntimeException("No se encontró el archivo car_race.sqlite en resources");

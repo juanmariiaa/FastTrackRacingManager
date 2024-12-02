@@ -9,7 +9,7 @@ public class StartingGrid {
     private List<GridPosition> gridPositions;
 
     public StartingGrid() {
-        this.gridPositions = new ArrayList<>();  // Inicializa la lista vacía
+        this.gridPositions = new ArrayList<>();
     }
 
     public StartingGrid(int raceId, List<GridPosition> gridPositions) {
