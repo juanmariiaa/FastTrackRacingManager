@@ -7,16 +7,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import org.juanmariiaa.model.DAO.DriverDAO;
 import org.juanmariiaa.model.DAO.StartingGridDAO;
-import org.juanmariiaa.model.domain.CarRace;  // Asegúrate de importar CarRace
+import org.juanmariiaa.model.domain.CarRace;
 import org.juanmariiaa.model.domain.Driver;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 public class GridController {
 
@@ -41,7 +48,11 @@ public class GridController {
     private DriverDAO driverDAO;
     private StartingGridDAO startingGridDAO;
 
-    private CarRace selectedCarRace;  // Aquí cambiamos a usar selectedCarRace
+    private CarRace selectedCarRace;
+
+    private final HashMap<String, String> teamColors = new HashMap<>();
+    private final Random random = new Random();
+
 
     public GridController() {
         driverDAO = new DriverDAO();
@@ -57,16 +68,46 @@ public class GridController {
         });
         nameColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getName() + " " + cellData.getValue().getSurname()));
         teamColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTeam().getName()));
+
+        // Establecer estilos de filas con colores de equipo
+        gridTableView.setRowFactory(tv -> new TableRow<Driver>() {
+            @Override
+            protected void updateItem(Driver driver, boolean empty) {
+                super.updateItem(driver, empty);
+                if (driver == null || empty) {
+                    setStyle("");
+                } else {
+                    String teamColor = getOrAssignTeamColor(driver.getTeam().getName());
+                    setStyle("-fx-background-color: " + teamColor + ";");
+                }
+            }
+        });
     }
 
-    // Método para cargar los datos del grid utilizando el objeto selectedCarRace
+    /**
+     * Obtiene el color asignado a un equipo o lo genera si no existe.
+     */
+    private String getOrAssignTeamColor(String teamName) {
+        if (!teamColors.containsKey(teamName)) {
+            String randomColor = generateRandomColor();
+            teamColors.put(teamName, randomColor);
+        }
+        return teamColors.get(teamName);
+    }
+    private String generateRandomColor() {
+        Color color = Color.rgb(random.nextInt(256), random.nextInt(256), random.nextInt(256));
+        return String.format("#%02X%02X%02X",
+                (int) (color.getRed() * 255),
+                (int) (color.getGreen() * 255),
+                (int) (color.getBlue() * 255));
+    }
+
+
     public void loadGridData(CarRace carRace) {
         this.selectedCarRace = carRace;  // Guardar la carrera seleccionada
 
-        // Cargar el ID de la carrera en el campo de texto
         raceIdField.setText(String.valueOf(carRace.getId()));
 
-        // Obtener los pilotos asociados con la carrera seleccionada
         List<Driver> drivers = driverDAO.findDriversByRaceId(carRace.getId());
 
         if (drivers.isEmpty()) {
@@ -74,7 +115,6 @@ public class GridController {
             return;
         }
 
-        // Mezclar la lista para generar el grid aleatorio
         Collections.shuffle(drivers);
 
         // Actualizar la tabla con los pilotos
@@ -115,24 +155,63 @@ public class GridController {
     }
 
     @FXML
+    private void exportGridToFile() {
+        if (gridTableView.getItems().isEmpty()) {
+            showAlert("Error", "No hay datos en el grid para exportar.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Guardar lista del Grid");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos de texto", "*.txt"));
+
+        // Mostrar el diálogo para seleccionar dónde guardar el archivo
+        File file = fileChooser.showSaveDialog(gridTableView.getScene().getWindow());
+        if (file != null) {
+            saveGridToFile(file);
+        }
+    }
+
+    private void saveGridToFile(File file) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+            writer.write("Grid: ");
+            writer.newLine();
+            writer.write(String.format("%-10s %-25s %-20s", "Position", "Driver", "Team"));
+            writer.newLine();
+            writer.write("------------------------------------------------------------");
+            writer.newLine();
+
+            ObservableList<Driver> drivers = gridTableView.getItems();
+            for (int i = 0; i < drivers.size(); i++) {
+                Driver driver = drivers.get(i);
+                String line = String.format("%-10d %-25s %-20s",
+                        i + 1,
+                        driver.getName() + " " + driver.getSurname(),
+                        driver.getTeam().getName());
+                writer.write(line);
+                writer.newLine();
+            }
+
+            showAlert("Success", "Grid list successfully exported.", Alert.AlertType.INFORMATION);
+        } catch (IOException e) {
+            showAlert("Error", "An error occurred while saving the file: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
     public void switchToShowTeams() {
         try {
-            // Cargar el archivo FXML para mostrar los equipos
             FXMLLoader loader = new FXMLLoader(getClass().getResource("showTeams.fxml"));
             Parent root = loader.load(); // Carga la interfaz de "showTeams.fxml"
 
-            // Obtener el controlador de la vista de ShowTeams y pasarle los datos necesarios
             ShowTeamsController controller = loader.getController();
             controller.loadTeams(selectedCarRace);  // Aquí pasamos el objeto selectedCarRace
 
-            // Cambiar el contenido de la escena principal
             Stage stage = (Stage) somePane.getScene().getWindow(); // Asegúrate de reemplazar `somePane` con el nodo adecuado
             stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
 
         } catch (IOException e) {
-            // Imprimir el error para el seguimiento
             e.printStackTrace();
-            // Mostrar un mensaje de error al usuario si lo prefieres
             Alert alert = new Alert(Alert.AlertType.ERROR, "Hubo un error al cargar la vista de los equipos.", ButtonType.OK);
             alert.showAndWait();
         }
@@ -141,15 +220,12 @@ public class GridController {
     @FXML
     private void switchToSelectedRace() {
         try {
-            // Cargar el archivo FXML para SelectedRace
             FXMLLoader loader = new FXMLLoader(getClass().getResource("selectedRace.fxml"));
             Parent root = loader.load(); // Carga la interfaz de "selectedRace.fxml"
 
-            // Obtener el controlador de la vista de SelectedRace y pasarle los datos necesarios
             SelectedRaceController controller = loader.getController();
             controller.initialize(selectedCarRace);  // Pasar el objeto selectedCarRace
 
-            // Cambiar el contenido de la escena principal
             Stage stage = (Stage) somePane.getScene().getWindow(); // Asegúrate de reemplazar `somePane` con el nodo adecuado
             stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
 
@@ -160,15 +236,12 @@ public class GridController {
     @FXML
     private void switchToPictures() {
         try {
-            // Cargar el archivo FXML de la vista de "PicturesTournament"
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pictures.fxml"));
             Parent root = loader.load(); // Carga la interfaz de "pictures.fxml"
 
-            // Obtener el controlador de la vista de "PicturesTournament"
             PicturesTournamentController controller = loader.getController();
             controller.loadPictures(selectedCarRace); // Cargar los datos para la vista de Pictures
 
-            // Cambiar el contenido de la escena principal
             Stage stage = (Stage) somePane.getScene().getWindow();
             stage.getScene().setRoot(root);
 

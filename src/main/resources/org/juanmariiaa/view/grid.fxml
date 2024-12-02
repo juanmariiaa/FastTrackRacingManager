@@ -16,7 +16,7 @@
 
 <Pane fx:id="somePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="774.0" style="-fx-background-color: #fdfdf3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.GridController">
    <children>
-      <Button layoutX="287.0" layoutY="444.0" mnemonicParsing="false" onAction="#handleGenerateGrid" prefHeight="29.0" prefWidth="175.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Generate Ramdom Grid" textFill="WHITE" />
+      <Button layoutX="100.0" layoutY="444.0" mnemonicParsing="false" onAction="#handleGenerateGrid" prefHeight="29.0" prefWidth="175.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Generate Ramdom Grid" textFill="WHITE" />
       <Pane prefHeight="58.0" prefWidth="774.0" style="-fx-background-color: #911f23;">
          <children>
             <ImageView fitHeight="58.0" fitWidth="59.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
@@ -79,5 +79,6 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Text>
+      <Button layoutX="488.0" layoutY="444.0" mnemonicParsing="false" onAction="#exportGridToFile" prefHeight="29.0" prefWidth="175.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Export Grid to .txt" textFill="WHITE" />
    </children>
 </Pane>
