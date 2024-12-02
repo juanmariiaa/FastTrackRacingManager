@@ -1,6 +1,5 @@
 package org.juanmariiaa.model.domain;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -9,7 +8,7 @@ public class CarRace {
     private String name;
     private String location;
     private String city;
-    private Date date;
+    private String date; // Cambiado de Date a String
     private List<RacingTeam> racingTeams;
 
     public CarRace() {
@@ -17,16 +16,16 @@ public class CarRace {
         this.name = "";
         this.location = "";
         this.city = "";
-        this.date = null;
+        this.date = null;  // Ahora es String, inicializado en null
         this.racingTeams = null;
     }
 
-    public CarRace(String name, String location, String city, Date date, List<RacingTeam> racingTeams) {
+    public CarRace(String name, String location, String city, String date, List<RacingTeam> racingTeams) {
         this.id = 0;
         this.name = name;
         this.location = location;
         this.city = city;
-        this.date = date;
+        this.date = date;  // Ahora se recibe un String para la fecha
         this.racingTeams = racingTeams;
     }
 
@@ -62,11 +61,11 @@ public class CarRace {
         this.city = city;
     }
 
-    public Date getDate() {
+    public String getDate() {  // Modificado para devolver un String
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {  // Modificado para aceptar un String
         this.date = date;
     }
 
@@ -77,7 +76,6 @@ public class CarRace {
     public void setTeams(List<RacingTeam> racingTeams) {
         this.racingTeams = racingTeams;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -94,12 +92,12 @@ public class CarRace {
 
     @Override
     public String toString() {
-        return "Tournament{" +
+        return "CarRace{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", location='" + location + '\'' +
                 ", city='" + city + '\'' +
-                ", date=" + date +
+                ", date='" + date + '\'' +  // Cambiado para mostrar String
                 ", teams=" + racingTeams +
                 '}';
     }

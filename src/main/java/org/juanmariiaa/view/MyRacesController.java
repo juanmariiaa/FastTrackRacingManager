@@ -38,13 +38,13 @@ public class MyRacesController implements Initializable {
     @FXML
     private TableColumn<CarRace, String> columnCity;
     @FXML
-    private TableColumn<CarRace, Date> columnDate;
+    private TableColumn<CarRace, String> columnDate;
 
     private ObservableList<CarRace> carRaces;
     private CarRaceDAO carRaceDAO = new CarRaceDAO();
 
     /**
-     * Initializes the controller, and display all the tournament details.
+     * Initializes the controller, and display all the race details.
      *
      * @param location  The location used to resolve relative paths for the root object.
      * @param resources The resources used to localize the root object.
@@ -56,7 +56,7 @@ public class MyRacesController implements Initializable {
             List<CarRace> carRaces = CarRaceDAO.build().findAll(userId);
             this.carRaces = FXCollections.observableArrayList(carRaces);
         } catch (SQLException e) {
-            Utils.showPopUp("Error", null, "Error while fetching tournaments: " + e.getMessage(), Alert.AlertType.ERROR);
+            Utils.showPopUp("Error", null, "Error while fetching races: " + e.getMessage(), Alert.AlertType.ERROR);
             throw new RuntimeException(e);
         }
 
@@ -64,19 +64,16 @@ public class MyRacesController implements Initializable {
         tableView.setEditable(true);
 
         // Set cell value factories for table columns
-        columnID.setCellValueFactory(tournament -> new SimpleIntegerProperty(tournament.getValue().getId()).asString());
-        columnName.setCellValueFactory(tournament -> new SimpleStringProperty(tournament.getValue().getName()));
-        columnLocation.setCellValueFactory(tournament -> new SimpleStringProperty(tournament.getValue().getLocation()));
-        columnCity.setCellValueFactory(tournament -> new SimpleStringProperty(tournament.getValue().getCity()));
-        columnDate.setCellValueFactory(cellData -> {
-            Date fecha = (Date) cellData.getValue().getDate();
-            return new SimpleObjectProperty<>(fecha);
-        });
+        columnID.setCellValueFactory(race -> new SimpleIntegerProperty(race.getValue().getId()).asString());
+        columnName.setCellValueFactory(race -> new SimpleStringProperty(race.getValue().getName()));
+        columnLocation.setCellValueFactory(race -> new SimpleStringProperty(race.getValue().getLocation()));
+        columnCity.setCellValueFactory(race -> new SimpleStringProperty(race.getValue().getCity()));
+        columnDate.setCellValueFactory(race -> new SimpleStringProperty(race.getValue().getDate()));
     }
 
     /**
-     * Handles the selection of a tournament.
-     * Opens the details view for the selected tournament.
+     * Handles the selection of a race.
+     * Opens the details view for the selected race.
      */
     @FXML
     private void selectTournament() {
@@ -94,16 +91,16 @@ public class MyRacesController implements Initializable {
                 stage.setScene(scene);
                 stage.setTitle("Tournament Details");
             } catch (IOException e) {
-                Utils.showPopUp("Error", null, "Error while opening tournament details: " + e.getMessage(), Alert.AlertType.ERROR);
+                Utils.showPopUp("Error", null, "Error while opening race details: " + e.getMessage(), Alert.AlertType.ERROR);
                 e.printStackTrace();
             }
         } else {
-            Utils.showPopUp("Error", null, "Please select a tournament first.", Alert.AlertType.ERROR);
+            Utils.showPopUp("Error", null, "Please select a race first.", Alert.AlertType.ERROR);
         }
     }
 
     /**
-     * Deletes the selected tournament.
+     * Deletes the selected race.
      */
     @FXML
     private void deleteSelected() {

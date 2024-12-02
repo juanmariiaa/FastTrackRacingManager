@@ -53,7 +53,7 @@ public class CarRaceDAO {
             statement.setString(1, carRace.getName());
             statement.setString(2, carRace.getLocation());
             statement.setString(3, carRace.getCity());
-            statement.setString(4, String.valueOf(carRace.getDate()));
+            statement.setString(4, carRace.getDate());
             statement.setInt(5, user.getId());
             statement.executeUpdate();
 
@@ -72,7 +72,7 @@ public class CarRaceDAO {
             statement.setString(1, carRace.getName());
             statement.setString(2, carRace.getLocation());
             statement.setString(3, carRace.getCity());
-            statement.setDate(4, (Date) carRace.getDate());
+            statement.setString(4, carRace.getDate());
             statement.setInt(5, carRace.getId());
             statement.executeUpdate();
         }
@@ -129,7 +129,7 @@ public class CarRaceDAO {
         carRace.setName(resultSet.getString("name"));
         carRace.setLocation(resultSet.getString("location"));
         carRace.setCity(resultSet.getString("city"));
-        carRace.setDate(resultSet.getDate("date"));
+        carRace.setDate(resultSet.getString("date"));
         carRace.setTeams(findTeamsByRaceId(carRace.getId()));
         return carRace;
     }

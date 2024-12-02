@@ -74,7 +74,9 @@ public class CreateRaceController {
                 return;
             }
 
-            java.sql.Date date = java.sql.Date.valueOf(localDate);
+            java.sql.Date sqlDate = java.sql.Date.valueOf(localDate);
+            String dateString = sqlDate.toString();
+
 
             ObservableList<String> selectedTeamNames = lvTeams.getSelectionModel().getSelectedItems();
             List<RacingTeam> selectedRacingTeams = new ArrayList<>();
@@ -85,7 +87,7 @@ public class CreateRaceController {
                 }
             }
 
-            CarRace carRace = new CarRace(name, location, city, date, selectedRacingTeams);
+            CarRace carRace = new CarRace(name, location, city, dateString, selectedRacingTeams);
 
             try {
                 carRace = carRaceDAO.save(currentUser, carRace);

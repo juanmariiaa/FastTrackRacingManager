@@ -49,7 +49,7 @@ public class AllRacesController implements Initializable {
     @FXML
     private TableColumn<CarRace,String> columnCity;
     @FXML
-    private TableColumn<CarRace, Date> columnDate;
+    private TableColumn<CarRace, String> columnDate;
     private ObservableList<CarRace> carRaces;
     CarRaceDAO carRaceDAO = new CarRaceDAO();
     private User currentUser;
@@ -118,40 +118,19 @@ public class AllRacesController implements Initializable {
             tableView.refresh();
         });
 
-
         columnDate.setCellValueFactory(new PropertyValueFactory<>("date"));
-        columnDate.setCellFactory(TextFieldTableCell.forTableColumn(new StringConverter<Date>() {
-            final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-
-            @Override
-            public String toString(Date object) {
-                if (object != null) {
-                    return dateFormatter.format(object.toLocalDate());
-                } else {
-                    return "";
-                }
-            }
-
-            @Override
-            public Date fromString(String string) {
-                if (string != null && !string.isEmpty()) {
-                    return Date.valueOf(LocalDate.parse(string, dateFormatter));
-                } else {
-                    return null;
-                }
-            }
-        }));
+        columnDate.setCellFactory(TextFieldTableCell.forTableColumn());
         columnDate.setOnEditCommit(event -> {
             CarRace carRace = event.getRowValue();
-            carRace.setDate(Date.valueOf(event.getNewValue().toLocalDate()));
+            carRace.setDate(event.getNewValue());
             try {
                 carRaceDAO.update(carRace);
             } catch (SQLException e) {
-                Utils.showPopUp("Error", null, "Write a correct format of date (dd-MM-yyyy): " + e.getMessage(), Alert.AlertType.ERROR);
-                e.printStackTrace();
+                Utils.showPopUp("Error", null, "Error while updating tournament: " + e.getMessage(), Alert.AlertType.ERROR);
             }
             tableView.refresh();
         });
+
     }
 
     @FXML

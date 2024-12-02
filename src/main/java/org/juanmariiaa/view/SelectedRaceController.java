@@ -19,7 +19,6 @@ import org.juanmariiaa.others.SingletonUserSession;
 import org.juanmariiaa.utils.Utils;
 
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -63,22 +62,30 @@ public class SelectedRaceController {
         this.selectedCarRace = carRace;
         this.carRaceDAO = new CarRaceDAO();
         this.racingTeamDAO = new RacingTeamDAO();
-        displayTournamentDetails();
+        displayRaceDetails();
         displayTeams();
     }
     /**
      * Displays the details of the selected tournament.
      */
-    private void displayTournamentDetails() {
+    private void displayRaceDetails() {
         nameField.setText(selectedCarRace.getName());
         locationField.setText(selectedCarRace.getLocation());
         cityField.setText(selectedCarRace.getCity());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        String formattedDate = dateFormat.format(selectedCarRace.getDate());
-        datePicker.setValue(LocalDate.parse(formattedDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+
+        // Si selectedCarRace.getDate() es un String con formato "yyyy-MM-dd"
+        String raceDateString = selectedCarRace.getDate();
+
+        // Convierte el String a LocalDate utilizando un DateTimeFormatter para el formato correcto
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate raceDate = LocalDate.parse(raceDateString, formatter);
+
+        // Establece la fecha en el DatePicker
+        datePicker.setValue(raceDate);
     }
 
-    public void loadTournamentData(CarRace carRace) {
+
+    public void loadRaceData(CarRace carRace) {
         if (this.selectedCarRace == null) {
             this.selectedCarRace = carRace;
         }
@@ -89,7 +96,7 @@ public class SelectedRaceController {
         }
 
         // Ahora puedes continuar con la carga de la información
-        displayTournamentDetails();
+        displayRaceDetails();
         displayTeams();
     }
 
@@ -122,7 +129,7 @@ public class SelectedRaceController {
             selectedCarRace.setName(nameField.getText());
             selectedCarRace.setLocation(locationField.getText());
             selectedCarRace.setCity(cityField.getText());
-            selectedCarRace.setDate(Date.valueOf(datePicker.getValue()));
+            selectedCarRace.setDate(String.valueOf(datePicker.getValue()));
             carRaceDAO.update(selectedCarRace);
             Utils.showPopUp("UPDATE", "Tournament Updated", "Tournament details updated successfully.", Alert.AlertType.INFORMATION);
         } catch (SQLException e) {
