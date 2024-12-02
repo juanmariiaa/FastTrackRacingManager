@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="774.0" style="-fx-background-color: #fdfdf3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.MyTournamentsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="774.0" style="-fx-background-color: #fdfdf3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.MyRacesController">
    <children>
       <TableView fx:id="tableView" editable="true" layoutX="63.0" layoutY="140.0" prefHeight="248.0" prefWidth="648.0">
          <columns>
@@ -21,33 +21,33 @@
             <TableColumn fx:id="columnDate" prefWidth="167.20001220703125" text="Date" />
          </columns>
       </TableView>
-      <Text layoutX="279.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TOURNAMENTS">
+      <Text layoutX="346.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RACES">
          <font>
             <Font size="28.0" />
          </font>
       </Text>
-      <Button layoutX="63.0" layoutY="429.0" mnemonicParsing="false" onAction="#btDelete" prefHeight="29.0" prefWidth="180.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Delete a selected Tournament" textFill="WHITE" />
-      <Pane prefHeight="58.0" prefWidth="774.0" style="-fx-background-color: #0e76a8;">
+      <Button layoutX="63.0" layoutY="429.0" mnemonicParsing="false" onAction="#btDelete" prefHeight="29.0" prefWidth="180.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Delete a selected Race" textFill="WHITE" />
+      <Pane prefHeight="58.0" prefWidth="774.0" style="-fx-background-color: #911f23;">
          <children>
-            <ImageView fitHeight="58.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="58.0" fitWidth="59.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/logo-no-bg.png" />
                </image>
             </ImageView>
             <Button layoutX="693.0" layoutY="17.0" mnemonicParsing="false" onAction="#switchToLogin" style="-fx-background-color: #fdfdf3; -fx-background-radius: 20;" text="Sign Out" />
-            <Hyperlink layoutX="205.0" layoutY="15.0" onAction="#switchToHome" text="Home" textFill="#a6fffe">
+            <Hyperlink layoutX="205.0" layoutY="15.0" onAction="#switchToHome" text="Home" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
             </Hyperlink>
-            <Hyperlink layoutX="467.0" layoutY="15.0" onAction="#switchToFinder" text="Finder" textFill="#a6fffe">
+            <Hyperlink layoutX="467.0" layoutY="15.0" onAction="#switchToFinder" text="Finder" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
             </Hyperlink>
          </children>
       </Pane>
-      <Button layoutX="572.0" layoutY="429.0" mnemonicParsing="false" onAction="#selectTournament" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Select Tournament" textFill="WHITE" />
-      <Button layoutX="341.0" layoutY="429.0" mnemonicParsing="false" onAction="#switchToCreateTournament" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Create Tournament" textFill="WHITE" />
+      <Button layoutX="572.0" layoutY="429.0" mnemonicParsing="false" onAction="#selectTournament" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Select Race" textFill="WHITE" />
+      <Button layoutX="341.0" layoutY="429.0" mnemonicParsing="false" onAction="#switchToCreateTournament" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Create Car Race" textFill="WHITE" />
    </children>
 </Pane>

@@ -16,6 +16,13 @@ public class DriverDAO {
     private final static String UPDATE = "UPDATE driver SET role=?, gender=?, first_name=?, surname=?, age=?, id_racingTeam=? WHERE dni=?";
     private final static String DELETE = "DELETE FROM driver WHERE dni=?";
     private final static String FIND_DRIVER_BY_TEAM = "SELECT * FROM driver WHERE id_racingTeam = ?";
+    private final static String CHECK_DNI_EXISTS = "SELECT COUNT(*) FROM driver WHERE dni = ?"; // Nueva consulta para verificar si el DNI existe
+    private final static String FIND_DRIVERS_BY_RACE_ID = "SELECT d.*\n" +
+            "FROM driver d\n" +
+            "JOIN racingTeam rt ON d.id_racingTeam = rt.id\n" +
+            "JOIN participation p ON rt.id = p.id_racingTeam\n" +
+            "WHERE p.id_carRace = ?";
+
 
     private Connection conn;
 
@@ -108,6 +115,41 @@ public class DriverDAO {
             e.printStackTrace();
         }
     }
+
+    // Método nuevo para verificar si el DNI ya existe
+    public boolean dniExists(String dni) {
+        boolean exists = false;
+        try (PreparedStatement statement = conn.prepareStatement(CHECK_DNI_EXISTS)) {
+            statement.setString(1, dni);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    exists = resultSet.getInt(1) > 0; // Si el conteo es mayor que 0, el DNI ya existe
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exists;
+    }
+
+    public List<Driver> findDriversByRaceId(int raceId) {
+        List<Driver> drivers = new ArrayList<>();
+        try (PreparedStatement statement = conn.prepareStatement(FIND_DRIVERS_BY_RACE_ID)) {
+            statement.setInt(1, raceId);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    Driver driver = driverEager(resultSet);
+                    drivers.add(driver);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return drivers;
+    }
+
+
+
 
 
     private Driver driverEager(ResultSet resultSet) throws SQLException {

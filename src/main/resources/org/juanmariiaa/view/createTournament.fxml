@@ -36,29 +36,29 @@
       <TextField fx:id="tfName" layoutX="77.0" layoutY="124.0" prefHeight="38.0" prefWidth="293.0" style="-fx-background-radius: 20;" />
       <TextField fx:id="tfCity" layoutX="77.0" layoutY="202.0" prefHeight="38.0" prefWidth="293.0" style="-fx-background-radius: 20;" />
       <TextField fx:id="tfLocation" layoutX="77.0" layoutY="277.0" prefHeight="38.0" prefWidth="293.0" style="-fx-background-radius: 20;" />
-      <Button fx:id="btnCreate" layoutX="356.0" layoutY="424.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="38.0" prefWidth="63.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Create" textFill="WHITE" />
+      <Button fx:id="btnCreate" layoutX="356.0" layoutY="424.0" mnemonicParsing="false" onAction="#createTournament" prefHeight="38.0" prefWidth="63.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Create" textFill="WHITE" />
       <DatePicker fx:id="dtDate" layoutX="77.0" layoutY="361.0" prefHeight="38.0" prefWidth="293.0" />
-      <Pane prefHeight="58.0" prefWidth="774.0" style="-fx-background-color: #0e76a8;">
+      <Pane prefHeight="58.0" prefWidth="774.0" style="-fx-background-color: #911f23;">
          <children>
-            <ImageView fitHeight="58.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="58.0" fitWidth="59.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/logo-no-bg.png" />
                </image>
             </ImageView>
             <Button layoutX="693.0" layoutY="17.0" mnemonicParsing="false" onAction="#switchToLogin" style="-fx-background-color: #fdfdf3; -fx-background-radius: 20;" text="Sign Out" />
-            <Hyperlink layoutX="200.0" layoutY="15.0" onAction="#switchToHome" text="Home" textFill="#a6fffe">
+            <Hyperlink layoutX="200.0" layoutY="15.0" onAction="#switchToHome" text="Home" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
             </Hyperlink>
-            <Hyperlink layoutX="462.0" layoutY="15.0" onAction="#switchToFinder" text="Finder" textFill="#a6fffe">
+            <Hyperlink layoutX="462.0" layoutY="15.0" onAction="#switchToFinder" text="Finder" textFill="WHITE">
                <font>
                   <Font size="15.0" />
                </font>
             </Hyperlink>
          </children>
       </Pane>
-      <Text layoutX="461.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add racingTeam to Tournament:">
+      <Text layoutX="461.0" layoutY="123.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Team to Race:">
          <font>
             <Font size="18.0" />
          </font>

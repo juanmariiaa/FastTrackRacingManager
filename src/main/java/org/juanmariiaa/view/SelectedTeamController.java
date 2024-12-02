@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -13,11 +14,16 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.io.ByteArrayInputStream;
+
+import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.juanmariiaa.model.DAO.DriverDAO;
 import org.juanmariiaa.model.DAO.RacingTeamDAO;
+import org.juanmariiaa.model.domain.CarRace;
 import org.juanmariiaa.model.domain.Driver;
+import org.juanmariiaa.model.domain.Picture;
 import org.juanmariiaa.model.domain.RacingTeam;
 import org.juanmariiaa.model.enums.Gender;
 import org.juanmariiaa.model.enums.Role;
@@ -25,7 +31,10 @@ import org.juanmariiaa.utils.Utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
+
+import static javafx.scene.layout.TilePane.setMargin;
 
 /**
  * Controller class for displaying and managing details of a selected team.
@@ -55,14 +64,16 @@ public class SelectedTeamController {
     @FXML
     private TableColumn<Driver, Gender> columnGender;
     @FXML
-    private ImageView logoImageView; // Add ImageView field
+    private ImageView logoImageView;
+    @FXML
+    private TilePane picturesTilePane;
 
     private RacingTeam selectedRacingTeam;
     private DriverDAO driverDAO;
     private RacingTeamDAO racingTeamDAO;
     private ObservableList<Driver> participantsData;
 
-    public void initialize(RacingTeam selectedRacingTeam) {
+    public void initialize(RacingTeam selectedRacingTeam) throws SQLException {
         this.selectedRacingTeam = selectedRacingTeam;
         this.racingTeamDAO = new RacingTeamDAO();
         this.driverDAO = new DriverDAO();
@@ -72,17 +83,32 @@ public class SelectedTeamController {
 
         // Display the logo
         displayLogo();
-
         displayParticipants();
     }
 
-    private void displayLogo() {
-        if (selectedRacingTeam.getImageData() != null && selectedRacingTeam.getImageData().length > 0) {
-            ByteArrayInputStream bis = new ByteArrayInputStream(selectedRacingTeam.getImageData());
-            Image logoImage = new Image(bis);
+    public void displayLogo() throws SQLException {
+        // Obtener los datos binarios del logo del equipo utilizando el RacingTeamDAO
+        byte[] logoImageData = racingTeamDAO.getImageDataByTeamId(selectedRacingTeam.getId());
+
+        // Verificamos si los datos de la imagen no son nulos y tienen contenido
+        if (logoImageData != null && logoImageData.length > 0) {
+            // Crear una imagen a partir de los datos binarios
+            Image logoImage = new Image(new ByteArrayInputStream(logoImageData));
+
+            // Establecer la imagen en el ImageView (suponiendo que logoImageView es tu ImageView en el FXML)
             logoImageView.setImage(logoImage);
+        } else {
+            // Si no hay logo, mostramos una alerta
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Logo no disponible");
+            alert.setHeaderText(null);
+            alert.setContentText("El logo del equipo no está disponible.");
+            alert.showAndWait();
         }
     }
+
+
+
 
     private void displayParticipants() {
         List<Driver> drivers = driverDAO.findDriversByTeam(selectedRacingTeam.getId());
@@ -194,6 +220,9 @@ public class SelectedTeamController {
             e.printStackTrace();
         }
     }
+
+
+
 
     public void closeWindow() {
         Stage stage = (Stage) tableView.getScene().getWindow();

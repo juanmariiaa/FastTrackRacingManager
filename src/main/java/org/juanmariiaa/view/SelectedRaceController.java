@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.juanmariiaa.model.DAO.RacingTeamDAO;
@@ -30,7 +31,7 @@ import java.util.List;
  * This controller handles updating tournament details, displaying associated teams
  * and creating new teams for this selected tournament.
  */
-public class SelectedTournamentController {
+public class SelectedRaceController {
 
     @FXML
     private TextField nameField;
@@ -42,6 +43,9 @@ public class SelectedTournamentController {
     private DatePicker datePicker;
     @FXML
     private ListView<RacingTeam> teamsListView;
+    @FXML
+    private Pane somePane; // Este es el Pane donde se cargará el nuevo contenido
+
     private User currentUser;
 
 
@@ -75,6 +79,22 @@ public class SelectedTournamentController {
         String formattedDate = dateFormat.format(selectedCarRace.getDate());
         datePicker.setValue(LocalDate.parse(formattedDate, DateTimeFormatter.ofPattern("dd-MM-yyyy")));
     }
+
+    public void loadTournamentData(CarRace carRace) {
+        if (this.selectedCarRace == null) {
+            this.selectedCarRace = carRace;
+        }
+
+        // Asegúrate de que el RacingTeamDAO y otros objetos se inicialicen correctamente
+        if (racingTeamDAO == null) {
+            racingTeamDAO = new RacingTeamDAO(); // O inicializa con una instancia existente
+        }
+
+        // Ahora puedes continuar con la carga de la información
+        displayTournamentDetails();
+        displayTeams();
+    }
+
 
     /**
      * Display the list of teams associated with the selected tournament.
@@ -150,42 +170,68 @@ public class SelectedTournamentController {
     @FXML
     public void switchToShowTeams() {
         try {
+            // Cargar el archivo FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("showTeams.fxml"));
-            Parent root = loader.load();
+            Parent root = loader.load(); // Carga la interfaz de "showTeams.fxml"
 
+            // Obtener el controlador y pasarle datos necesarios
             ShowTeamsController controller = loader.getController();
             controller.loadTeams(selectedCarRace);
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
+            // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow(); // `somePane` es un nodo actual de la escena
+            stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    private void switchToPictures() {
+    public void switchToGrid() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("pictures.fxml"));
-            Parent root = loader.load();
+            // Cargar el archivo FXML para Grid
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("grid.fxml"));
+            Parent root = loader.load(); // Carga la interfaz de "grid.fxml"
 
-            PicturesTournamentController controller = loader.getController();
-            controller.loadPictures(selectedCarRace);
+            // Obtener el controlador y pasarle datos necesarios
+            GridController controller = loader.getController();
+            controller.loadGridData(selectedCarRace); // Llamar al método adecuado para cargar los datos
 
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Tournament Pictures");
-            stage.initModality(Modality.APPLICATION_MODAL);
-            stage.showAndWait();
+            // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow(); // `somePane` es un nodo actual de la escena
+            stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
         } catch (IOException e) {
             e.printStackTrace();
-            Utils.showPopUp("ERROR", "Picture Display Failed", "Failed to load pictures.", Alert.AlertType.ERROR);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
+
+    @FXML
+    private void switchToPictures() {
+        try {
+            // Cargar el archivo FXML de la vista de "PicturesTournament"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("pictures.fxml"));
+            Parent root = loader.load(); // Carga la interfaz de "pictures.fxml"
+
+            // Obtener el controlador de la vista de "PicturesTournament"
+            PicturesTournamentController controller = loader.getController();
+            controller.loadPictures(selectedCarRace); // Cargar los datos para la vista de Pictures
+
+            // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow();
+            stage.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error cargando el archivo FXML de PicturesTournament", e);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al interactuar con la base de datos", e);
+        }
+    }
+
+    @FXML
+    private void switchToMyRaces() throws IOException {
+        App.setRoot("myRaces");
+    }
 
     @FXML
     private void switchToLogin() throws IOException {

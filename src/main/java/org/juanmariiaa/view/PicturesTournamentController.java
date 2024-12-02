@@ -1,12 +1,16 @@
 package org.juanmariiaa.view;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.TilePane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -27,6 +31,8 @@ public class PicturesTournamentController {
 
     @FXML
     private TilePane picturesTilePane;
+    @FXML
+    private Pane somePane;
 
     private CarRace selectedCarRace;
     private PictureDAO pictureDAO = new PictureDAO();
@@ -121,4 +127,90 @@ public class PicturesTournamentController {
             alert.showAndWait();
         }
     }
+    @FXML
+    public void switchToShowTeams() {
+        try {
+            // Cargar el archivo FXML
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("showTeams.fxml"));
+            Parent root = loader.load(); // Carga la interfaz de "showTeams.fxml"
+
+            // Obtener el controlador y pasarle los datos necesarios
+            ShowTeamsController controller = loader.getController();
+            controller.loadTeams(selectedCarRace); // Asegúrate de que `selectedCarRace` esté correctamente inicializado
+
+            // Obtener la referencia a la ventana actual (Stage)
+            Stage stage = (Stage) somePane.getScene().getWindow(); // Reemplaza `somePane` con el nodo adecuado, si es necesario
+            stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
+
+        } catch (IOException e) {
+            // Imprimir el error para el seguimiento
+            e.printStackTrace();
+            // O también podrías mostrar un mensaje de error al usuario si prefieres
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Hubo un error al cargar la vista de los equipos.", ButtonType.OK);
+            alert.showAndWait();
+        }
+    }
+
+
+
+    @FXML
+    private void switchToSelectedRace() {
+        try {
+            // Cargar el archivo FXML para SelectedTournament
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("selectedRace.fxml"));
+            Parent root = loader.load(); // Carga la interfaz de "selectedRace.fxml"
+
+            // Obtener el controlador de la vista de SelectedTournament
+            SelectedRaceController controller = loader.getController();
+            controller.initialize(selectedCarRace); // Pasar los datos necesarios al controlador
+
+            // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow();
+            stage.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error cargando el archivo FXML de SelectedTournament", e);
+        }
+    }
+
+    @FXML
+    public void switchToGrid() {
+        try {
+            // Cargar el archivo FXML para Grid
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("grid.fxml"));
+            Parent root = loader.load(); // Carga la interfaz de "grid.fxml"
+
+            // Obtener el controlador y pasarle datos necesarios
+            GridController controller = loader.getController();
+            controller.loadGridData(selectedCarRace); // Llamar al método adecuado para cargar los datos
+
+            // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow(); // `somePane` es un nodo actual de la escena
+            stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    @FXML
+    private void switchToLogin() throws IOException {
+        App.setRoot("login");
+    }
+    @FXML
+    private void switchToMyTournament() throws IOException {
+        App.setRoot("myTournaments");
+    }
+
+    @FXML
+    private void switchToHome() throws IOException {
+        App.setRoot("home");
+    }
+
+    @FXML
+    private void switchToFinder() throws IOException {
+        App.setRoot("finder");
+    }
+
+
 }

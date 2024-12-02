@@ -11,7 +11,7 @@ import java.io.IOException;
 public class HomeController {
     @FXML
     private void switchToMyTournaments() throws IOException {
-        App.setRoot("myTournaments");
+        App.setRoot("myRaces");
     }
 
     @FXML

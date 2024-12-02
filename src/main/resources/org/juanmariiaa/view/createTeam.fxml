@@ -10,9 +10,9 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="536.0" prefWidth="362.0" style="-fx-background-color: #fdfdf3; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.CreateTeamController">
    <children>
-      <Pane prefHeight="70.0" prefWidth="362.0" style="-fx-background-color: #0e76a8;">
+      <Pane prefHeight="70.0" prefWidth="362.0" style="-fx-background-color: #911f23;">
          <children>
-            <ImageView fitHeight="70.0" fitWidth="88.0" layoutX="146.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="70.0" fitWidth="88.0" layoutX="137.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../Images/logo-no-bg.png" />
                </image>
@@ -37,7 +37,7 @@
       <TextField fx:id="nameField" layoutX="35.0" layoutY="130.0" prefHeight="38.0" prefWidth="293.0" style="-fx-background-radius: 20;" />
       <TextField fx:id="cityField" layoutX="35.0" layoutY="205.0" prefHeight="38.0" prefWidth="293.0" style="-fx-background-radius: 20;" />
       <TextField fx:id="institutionField" layoutX="34.0" layoutY="284.0" prefHeight="38.0" prefWidth="293.0" style="-fx-background-radius: 20;" />
-      <Button fx:id="btnCreate" layoutX="152.0" layoutY="472.0" mnemonicParsing="false" onAction="#createTeam" prefHeight="38.0" prefWidth="63.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Create" textFill="WHITE" />
+      <Button fx:id="btnCreate" layoutX="152.0" layoutY="472.0" mnemonicParsing="false" onAction="#createTeam" prefHeight="38.0" prefWidth="63.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Create" textFill="WHITE" />
       <Text layoutX="38.0" layoutY="348.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Logo:">
          <font>
             <Font size="18.0" />

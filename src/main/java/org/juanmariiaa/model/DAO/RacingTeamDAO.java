@@ -16,6 +16,8 @@ public class RacingTeamDAO {
     private final static String INSERT = "INSERT INTO racingTeam (id, name, city, institution, id_user, logo) VALUES (?, ?, ?, ?, ?, ?)";
     private final static String UPDATE = "UPDATE racingTeam SET name=?, city=?, institution=? WHERE id=?";
     private final static String DELETE = "DELETE FROM racingTeam WHERE id=?";
+    private final static String SELECT_LOGO = "SELECT logo FROM racingTeam WHERE id = ?";
+
     private final static String FIND_TEAMS_BY_RACE = "SELECT t.id, t.name, t.city, t.institution " +
             "FROM racingTeam t " +
             "JOIN participation p ON t.id = p.id_racingTeam " +
@@ -179,6 +181,20 @@ public class RacingTeamDAO {
         }
         return racingTeams;
     }
+    public byte[] getImageDataByTeamId(int teamId) throws SQLException {
+        try (PreparedStatement ps = this.conn.prepareStatement(SELECT_LOGO)) {
+            ps.setInt(1, teamId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getBytes("logo");
+                } else {
+                    return null;
+                }
+            }
+        }
+    }
+
+
 
     private RacingTeam teamEager(ResultSet res) throws SQLException {
         RacingTeam racingTeam = new RacingTeam();

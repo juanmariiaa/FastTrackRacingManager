@@ -11,12 +11,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="774.0" style="-fx-background-color: #fdfdf3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.HomeController">
    <children>
-      <ImageView fitHeight="135.0" fitWidth="131.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="210.0" fitWidth="242.0" layoutX="62.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../Images/logo.jpg" />
+            <Image url="@../images/logo.png" />
          </image>
       </ImageView>
-      <Text layoutX="17.0" layoutY="174.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to your carRace manager" wrappingWidth="308.259765625">
+      <Text layoutX="22.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Welcome to Race manager" wrappingWidth="289.259765625">
          <font>
             <Font size="41.0" />
          </font>
@@ -36,9 +36,9 @@
             <Image url="@../Images/GitHub-logo.png" />
          </image>
       </ImageView>
-      <Pane layoutX="417.0" prefHeight="489.0" prefWidth="357.0" style="-fx-background-color: #0e76a8;">
+      <Pane layoutX="417.0" prefHeight="489.0" prefWidth="357.0" style="-fx-background-color: #782f2a;">
          <children>
-            <Button layoutX="12.0" layoutY="159.0" mnemonicParsing="false" onAction="#switchToMyTournaments" prefHeight="39.0" prefWidth="339.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" text="My Tournaments" textAlignment="CENTER">
+            <Button layoutX="12.0" layoutY="159.0" mnemonicParsing="false" onAction="#switchToMyTournaments" prefHeight="39.0" prefWidth="339.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" text="My Races" textAlignment="CENTER">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>

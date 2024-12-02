@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -9,47 +11,76 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="774.0" style="-fx-background-color: #fdfdf3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.ShowTeamsController">
+<Pane fx:id="somePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="774.0" style="-fx-background-color: #fdfdf3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.ShowTeamsController">
    <children>
-      <TableView fx:id="tableView" editable="true" layoutX="63.0" layoutY="149.0" prefHeight="248.0" prefWidth="648.0">
+      <Button layoutX="318.0" layoutY="446.0" mnemonicParsing="false" onAction="#switchToCreateTeam" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Create a Team" textFill="WHITE" />
+      <ImageView fitHeight="73.0" fitWidth="24.0" layoutX="683.0" layoutY="132.0" onMouseClicked="#refresh" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/refresh.png" />
+         </image>
+      </ImageView>
+      <Pane prefHeight="58.0" prefWidth="774.0" style="-fx-background-color: #911f23;">
+         <children>
+            <ImageView fitHeight="58.0" fitWidth="59.0" layoutX="14.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/logo-no-bg.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="693.0" layoutY="17.0" mnemonicParsing="false" onAction="#switchToLogin" style="-fx-background-color: #fdfdf3; -fx-background-radius: 20;" text="Sign Out" />
+            <Hyperlink layoutX="205.0" layoutY="15.0" onAction="#switchToHome" text="Home" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink layoutX="467.0" layoutY="15.0" onAction="#switchToFinder" text="Finder" textFill="WHITE">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </Pane>
+      <TableView fx:id="tableView" editable="true" layoutX="59.0" layoutY="160.0" prefHeight="248.0" prefWidth="648.0">
          <columns>
             <TableColumn fx:id="nameColumn" prefWidth="250.0" text="Name" />
             <TableColumn fx:id="cityColumn" minWidth="0.0" prefWidth="163.0" text="City" />
             <TableColumn fx:id="institutionColumn" prefWidth="234.0" text="Institution" />
          </columns>
       </TableView>
-      <Button layoutX="594.0" layoutY="438.0" mnemonicParsing="false" onAction="#deleteSelected" prefHeight="29.0" prefWidth="117.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Delete a selected Team" textFill="WHITE">
-         <font>
-            <Font size="10.0" />
-         </font></Button>
-      <Text layoutX="136.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" text="TEAMS IN THE SELECTED TOURNAMENT">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Text>
-      <Pane prefHeight="58.0" prefWidth="774.0" style="-fx-background-color: #0e76a8;">
-         <children>
-            <ImageView fitHeight="58.0" fitWidth="59.0" layoutX="358.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../Images/logo-no-bg.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-      <Button layoutX="63.0" layoutY="438.0" mnemonicParsing="false" onAction="#switchToSelectTeam" prefHeight="29.0" prefWidth="117.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Select a Team" textFill="WHITE">
+      <Button layoutX="604.0" layoutY="448.0" mnemonicParsing="false" onAction="#deleteSelected" prefHeight="29.0" prefWidth="117.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Delete a selected Team" textFill="WHITE">
          <font>
             <Font size="10.0" />
          </font>
       </Button>
-      <ImageView fitHeight="73.0" fitWidth="24.0" layoutX="687.0" layoutY="122.0" onMouseClicked="#refresh" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../Images/refresh.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="24.0" fitWidth="40.0" layoutX="52.0" layoutY="88.0" onMouseClicked="#closeWindow" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="73.0" layoutY="448.0" mnemonicParsing="false" onAction="#switchToSelectTeam" prefHeight="29.0" prefWidth="117.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Select a Team" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Button>
+      <ImageView fitHeight="24.0" fitWidth="40.0" layoutX="26.0" layoutY="69.0" onMouseClicked="#switchToMyRaces" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/back.png" />
          </image>
       </ImageView>
+      <Text fill="#a1a1a1" layoutX="121.0" layoutY="101.0" onMouseClicked="#switchToSelectedRace" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Separator layoutX="2.0" layoutY="108.0" prefHeight="19.0" prefWidth="782.0" />
+      <Text layoutX="296.0" layoutY="100.0" onMouseClicked="#switchToShowTeams" strokeType="OUTSIDE" strokeWidth="0.0" text="Teams">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#a1a1a1" layoutX="465.0" layoutY="100.0" onMouseClicked="#switchToPictures" strokeType="OUTSIDE" strokeWidth="0.0" text="Pictures">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#a1a1a1" layoutX="644.0" layoutY="100.0" onMouseClicked="#switchToGrid" strokeType="OUTSIDE" strokeWidth="0.0" text="Grid">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
    </children>
 </Pane>

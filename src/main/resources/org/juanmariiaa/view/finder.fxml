@@ -9,9 +9,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="774.0" style="-fx-background-color: #0e76a8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.FinderController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="774.0" style="-fx-background-color: #911f23;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.FinderController">
    <children>
-      <ImageView fitHeight="135.0" fitWidth="131.0" layoutX="205.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="135.0" fitWidth="131.0" layoutX="190.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/logo-no-bg.png" />
          </image>
@@ -32,7 +32,7 @@
             <Font size="42.0" />
          </font>
       </Text>
-      <Button layoutX="226.0" layoutY="134.0" mnemonicParsing="false" onAction="#switchToTournaments" prefHeight="39.0" prefWidth="339.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" text="Tournaments" textAlignment="CENTER">
+      <Button layoutX="226.0" layoutY="134.0" mnemonicParsing="false" onAction="#switchToTournaments" prefHeight="39.0" prefWidth="339.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" text="Races" textAlignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -48,7 +48,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="226.0" layoutY="260.0" mnemonicParsing="false" onAction="#switchToParticipants" prefHeight="39.0" prefWidth="339.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" text="Participants" textAlignment="CENTER">
+      <Button layoutX="226.0" layoutY="260.0" mnemonicParsing="false" onAction="#switchToParticipants" prefHeight="39.0" prefWidth="339.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" text="Drivers" textAlignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

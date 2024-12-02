@@ -41,7 +41,7 @@
       <TextField fx:id="tfName" layoutX="29.0" layoutY="118.0" prefHeight="25.0" prefWidth="265.0" style="-fx-background-radius: 20;" />
       <TextField fx:id="tfSurname" layoutX="29.0" layoutY="176.0" prefHeight="25.0" prefWidth="265.0" style="-fx-background-radius: 20;" />
       <TextField fx:id="tfUsername" layoutX="28.0" layoutY="232.0" prefHeight="25.0" prefWidth="265.0" style="-fx-background-radius: 20;" />
-      <Button layoutX="28.0" layoutY="346.0" mnemonicParsing="false" onAction="#btSignUp" prefHeight="40.0" prefWidth="272.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Sign Up" textAlignment="CENTER" textFill="WHITE">
+      <Button layoutX="28.0" layoutY="346.0" mnemonicParsing="false" onAction="#btSignUp" prefHeight="40.0" prefWidth="272.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Sign Up" textAlignment="CENTER" textFill="WHITE">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

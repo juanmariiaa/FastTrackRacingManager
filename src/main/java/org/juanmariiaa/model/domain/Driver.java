@@ -59,6 +59,11 @@ public class Driver extends Person {
         this.racingTeam = racingTeam;
     }
 
+    // Nuevo método para obtener el ID del equipo de carreras
+    public int getIdRacingTeam() {
+        return (racingTeam != null) ? racingTeam.getId() : 0; // Retorna 0 si el equipo es nulo
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), age, role, gender, racingTeam);

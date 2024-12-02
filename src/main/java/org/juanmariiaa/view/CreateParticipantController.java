@@ -61,20 +61,32 @@ public class CreateParticipantController implements Initializable {
         String name = nameField.getText();
         String surname = surnameField.getText();
         int age = 0;
+
+        // Verificar si el DNI es un número válido
         try {
             age = Integer.parseInt(ageField.getText());
         } catch (NumberFormatException e) {
             Utils.showPopUp("Error", null, "Please enter a valid age.", Alert.AlertType.ERROR);
             return;
         }
+
         Role role = cbRole.getValue();
         Gender gender = cbGender.getValue();
 
+        // Validación de los campos
         if (DNI.isEmpty() || name.isEmpty() || surname.isEmpty() || !isValidDNI(DNI) || age <= 0 || role == null || gender == null) {
             Utils.showPopUp("Error", null, "Please fill in all fields correctly.", Alert.AlertType.ERROR);
             return;
         }
 
+        // Verificar si el DNI ya existe en la base de datos
+        driverDAO = new DriverDAO();
+        if (driverDAO.dniExists(DNI)) {
+            Utils.showPopUp("Error", null, "A participant with this DNI already exists.", Alert.AlertType.ERROR);
+            return;
+        }
+
+        // Crear el nuevo conductor
         Driver newDriver = new Driver();
         newDriver.setDni(DNI);
         newDriver.setName(name);
@@ -84,7 +96,7 @@ public class CreateParticipantController implements Initializable {
         newDriver.setGender(gender);
         newDriver.setTeam(selectedRacingTeam);
 
-        driverDAO = new DriverDAO();
+        // Guardar el nuevo participante en la base de datos
         driverDAO.save(currentUser, newDriver);
         Utils.showPopUp("Success", null, "Participant created successfully!", Alert.AlertType.INFORMATION);
         closeWindow();

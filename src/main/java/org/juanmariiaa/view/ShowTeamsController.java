@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.juanmariiaa.model.DAO.RacingTeamDAO;
@@ -39,7 +40,8 @@ public class ShowTeamsController implements Initializable {
     private TableColumn<RacingTeam, String> cityColumn;
     @FXML
     private TableColumn<RacingTeam, String> institutionColumn;
-
+    @FXML
+    private Pane somePane; // Este es el Pane donde se cargará el nuevo contenido
     private User currentUser;
     private ObservableList<RacingTeam> racingTeams;
     private final RacingTeamDAO racingTeamDAO = new RacingTeamDAO();
@@ -107,10 +109,107 @@ public class ShowTeamsController implements Initializable {
             stage.setTitle("Select Team");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
+        } catch (IOException | SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void switchToPictures() {
+        try {
+            // Cargar el archivo FXML de la vista de "PicturesTournament"
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("pictures.fxml"));
+            Parent root = loader.load(); // Carga la interfaz de "pictures.fxml"
+
+            // Obtener el controlador de la vista de "PicturesTournament"
+            PicturesTournamentController controller = loader.getController();
+            controller.loadPictures(selectedCarRace); // Cargar los datos para la vista de Pictures
+
+            // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow();
+            stage.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error cargando el archivo FXML de PicturesTournament", e);
+        } catch (SQLException e) {
+            throw new RuntimeException("Error al interactuar con la base de datos", e);
+        }
+    }
+
+    @FXML
+    private void switchToSelectedRace() {
+        try {
+            // Cargar el archivo FXML para SelectedTournament
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("selectedRace.fxml"));
+            Parent root = loader.load(); // Carga la interfaz de "selectedRace.fxml"
+
+            // Obtener el controlador de la vista de SelectedTournament
+            SelectedRaceController controller = loader.getController();
+            controller.initialize(selectedCarRace); // Pasar los datos necesarios al controlador
+
+            // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow();
+            stage.getScene().setRoot(root);
+
+        } catch (IOException e) {
+            throw new RuntimeException("Error cargando el archivo FXML de SelectedTournament", e);
+        }
+    }
+
+    @FXML
+    private void switchToCreateTeam() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("createTeam.fxml"));
+        Parent root = loader.load();
+
+        CreateTeamController controller = loader.getController();
+        controller.setSelectedTournament(selectedCarRace);
+        controller.setTeamDAO(racingTeamDAO);
+
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.setTitle("Create Team");
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.showAndWait();
+    }
+
+    @FXML
+    public void switchToGrid() {
+        try {
+            // Cargar el archivo FXML para Grid
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("grid.fxml"));
+            Parent root = loader.load(); // Carga la interfaz de "grid.fxml"
+
+            // Obtener el controlador y pasarle datos necesarios
+            GridController controller = loader.getController();
+            controller.loadGridData(selectedCarRace); // Llamar al método adecuado para cargar los datos
+
+            // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow(); // `somePane` es un nodo actual de la escena
+            stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void switchToLogin() throws IOException {
+        App.setRoot("login");
+    }
+
+    @FXML
+    private void switchToHome() throws IOException {
+        App.setRoot("home");
+    }
+
+    @FXML
+    private void switchToFinder() throws IOException {
+        App.setRoot("finder");
+    }
+    @FXML
+    private void switchToMyRaces() throws IOException {
+        App.setRoot("myRaces");
+    }
+
     @FXML
     public void refresh() {
         if (selectedCarRace != null) {

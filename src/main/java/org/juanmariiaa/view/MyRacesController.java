@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 /**
  * Controller class that display all the Tournament associated with the currentUser.
  */
-public class MyTournamentsController implements Initializable {
+public class MyRacesController implements Initializable {
     @FXML
     private TableView<CarRace> tableView;
     @FXML
@@ -83,10 +83,10 @@ public class MyTournamentsController implements Initializable {
         CarRace selectedCarRace = tableView.getSelectionModel().getSelectedItem();
         if (selectedCarRace != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("selectedTournament.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("selectedRace.fxml"));
                 Parent root = loader.load();
 
-                SelectedTournamentController controller = loader.getController();
+                SelectedRaceController controller = loader.getController();
                 controller.initialize(selectedCarRace);
 
                 Scene scene = new Scene(root);
