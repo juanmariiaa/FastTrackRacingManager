@@ -15,9 +15,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class StartingGridDAO {
-    private static final String INSERT = "INSERT INTO startingGrid (id_carRace, position, dni_driver, id_racingTeam) VALUES (?, ?, ?, ?)";
-    private static final String FIND_BY_RACE_ID = "SELECT * FROM startingGrid WHERE id_carRace = ?";
+    private static final String INSERT = "INSERT INTO startingGrid (id_carRace, position, dni_driver, id_racingTeam) \" +\n" +
+            "                \"VALUES (?, ?, ?, ?) \" +\n" +
+            "                \"ON DUPLICATE KEY UPDATE dni_driver = VALUES(dni_driver), id_racingTeam = VALUES(id_racingTeam)";
     private static final String DELETE_BY_RACE_ID = "DELETE FROM startingGrid WHERE id_carRace = ?";
+    private static final String FINDGRIDBYRACEID = "SELECT * FROM startingGrid WHERE id_carRace = ? ORDER BY position";
+
 
     private Connection conn;
 
@@ -36,49 +39,43 @@ public class StartingGridDAO {
                 stmt.setInt(2, position.getPosition());
                 stmt.setString(3, position.getDriverDni());
                 stmt.setInt(4, position.getRacingTeamId());
-                stmt.addBatch();
+
+                stmt.executeUpdate();
             }
-            stmt.executeBatch();
         }
     }
 
-    public StartingGrid findByRaceId(int raceId) throws SQLException {
-        List<GridPosition> positions = new ArrayList<>();
-        try (PreparedStatement stmt = conn.prepareStatement(FIND_BY_RACE_ID)) {
-            stmt.setInt(1, raceId);
-            try (ResultSet rs = stmt.executeQuery()) {
-                while (rs.next()) {
-                    positions.add(new GridPosition(
-                            rs.getInt("position"),
-                            rs.getString("dni_driver"),
-                            rs.getInt("id_racingTeam")
-                    ));
-                }
-            }
-        }
-        return new StartingGrid(raceId, positions);
-    }
 
-    public void createRandomStartingGrid(int raceId) throws SQLException {
+
+
+
+    public StartingGrid findGridByRaceId(int raceId) throws SQLException {
         List<GridPosition> gridPositions = new ArrayList<>();
-        DriverDAO driverDAO = new DriverDAO(conn);
 
-        // Obtener todos los drivers asociados a la carrera
-        List<Driver> drivers = driverDAO.findDriversByRaceId(raceId);
+        try (PreparedStatement stmt = conn.prepareStatement(FINDGRIDBYRACEID)) {
+            stmt.setInt(1, raceId);
+            ResultSet rs = stmt.executeQuery();
 
-        // Mezclar la lista de drivers aleatoriamente
-        Collections.shuffle(drivers);
+            while (rs.next()) {
+                int position = rs.getInt("position");
+                String driverDni = rs.getString("dni_driver");
+                int racingTeamId = rs.getInt("id_racingTeam");
 
-        // Asignar posiciones
-        int position = 1;
-        for (Driver driver : drivers) {
-            gridPositions.add(new GridPosition(position++, driver.getDni(), driver.getIdRacingTeam()));
+                GridPosition gridPosition = new GridPosition(position, driverDni, racingTeamId);
+                gridPositions.add(gridPosition);
+            }
+
+            if (!gridPositions.isEmpty()) {
+                return new StartingGrid(raceId, gridPositions);
+            }
         }
-
-        // Crear la StartingGrid y guardarla
-        StartingGrid startingGrid = new StartingGrid(raceId, gridPositions);
-        save(startingGrid);
+        return null;
     }
+
+
+
+
+
 
     public void deleteByRaceId(int raceId) throws SQLException {
         try (PreparedStatement stmt = conn.prepareStatement(DELETE_BY_RACE_ID)) {

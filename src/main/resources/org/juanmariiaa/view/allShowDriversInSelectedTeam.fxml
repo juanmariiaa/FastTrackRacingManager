@@ -7,13 +7,13 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="362.0" style="-fx-background-color: #0e76a8; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.AllShowDriversInSelectedTeamController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="592.0" prefWidth="362.0" style="-fx-background-color: #911f23; -fx-background-radius: 20;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.AllShowDriversInSelectedTeamController">
    <children>
-      <Pane prefHeight="70.0" prefWidth="362.0" style="-fx-background-color: #0e76a8;">
+      <Pane prefHeight="70.0" prefWidth="362.0" style="-fx-background-color: #911f23;">
          <children>
-            <ImageView fitHeight="70.0" fitWidth="88.0" layoutX="146.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="70.0" fitWidth="88.0" layoutX="137.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../../../../IdeaProjects/TournamentManager/src/main/resources/org/juanmariiaa/Images/logo-no-bg.png" />
+                  <Image url="@../images/logo.png" />
                </image>
             </ImageView>
          </children>

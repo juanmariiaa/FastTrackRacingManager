@@ -149,6 +149,22 @@ public class DriverDAO {
         return drivers;
     }
 
+    public Driver findDriverByDni(String dni) {
+        Driver driver = null;
+        try (PreparedStatement statement = conn.prepareStatement("SELECT * FROM driver WHERE dni = ?")) {
+            statement.setString(1, dni);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                if (resultSet.next()) {
+                    driver = driverEager(resultSet);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return driver;
+    }
+
+
 
 
 

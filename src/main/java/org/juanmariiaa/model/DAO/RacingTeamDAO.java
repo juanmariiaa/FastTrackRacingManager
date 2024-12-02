@@ -23,6 +23,13 @@ public class RacingTeamDAO {
             "FROM racingTeam t " +
             "JOIN participation p ON t.id = p.id_racingTeam " +
             "WHERE p.id_carRace = ?";
+    private static final String FIND_TEAMS_WITH_MOST_PARTICIPATIONS =
+            "SELECT rt.id, rt.name, rt.city, rt.institution, COUNT(p.id_carRace) AS participations " +
+                    "FROM racingTeam rt " +
+                    "JOIN participation p ON rt.id = p.id_racingTeam " +
+                    "GROUP BY rt.id " +
+                    "ORDER BY participations DESC " +
+                    "LIMIT ?";
 
 
 
@@ -193,6 +200,24 @@ public class RacingTeamDAO {
                 }
             }
         }
+    }
+
+    public List<RacingTeam> findTeamsWithMostParticipations(int limit) throws SQLException {
+        List<RacingTeam> teams = new ArrayList<>();
+        try (PreparedStatement pst = this.conn.prepareStatement(FIND_TEAMS_WITH_MOST_PARTICIPATIONS)) {
+            pst.setInt(1, limit); // Número máximo de equipos a devolver
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    RacingTeam team = new RacingTeam();
+                    team.setId(rs.getInt("id"));
+                    team.setName(rs.getString("name"));
+                    team.setCity(rs.getString("city"));
+                    team.setInstitution(rs.getString("institution"));
+                    teams.add(team);
+                }
+            }
+        }
+        return teams;
     }
 
 

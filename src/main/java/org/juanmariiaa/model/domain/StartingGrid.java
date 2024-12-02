@@ -1,5 +1,6 @@
 package org.juanmariiaa.model.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,11 +9,18 @@ public class StartingGrid {
     private List<GridPosition> gridPositions;
 
     public StartingGrid() {
+        this.gridPositions = new ArrayList<>();  // Inicializa la lista vacía
     }
 
     public StartingGrid(int raceId, List<GridPosition> gridPositions) {
         this.raceId = raceId;
-        this.gridPositions = gridPositions;
+        this.gridPositions = gridPositions != null ? gridPositions : new ArrayList<>();
+    }
+
+    public void addGridPosition(GridPosition gridPosition) {
+        if (gridPositions != null) {
+            gridPositions.add(gridPosition);
+        }
     }
 
     public int getRaceId() {

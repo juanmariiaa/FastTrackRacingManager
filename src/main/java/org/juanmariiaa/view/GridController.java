@@ -15,16 +15,15 @@ import org.juanmariiaa.model.DAO.DriverDAO;
 import org.juanmariiaa.model.DAO.StartingGridDAO;
 import org.juanmariiaa.model.domain.CarRace;
 import org.juanmariiaa.model.domain.Driver;
+import org.juanmariiaa.model.domain.GridPosition;
+import org.juanmariiaa.model.domain.StartingGrid;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 public class GridController {
 
@@ -62,14 +61,12 @@ public class GridController {
 
     @FXML
     public void initialize() {
-        // Inicializar la tabla como editable
         gridTableView.setEditable(true);
         positionColumn.setCellValueFactory(cellData -> {
             int index = gridTableView.getItems().indexOf(cellData.getValue()) + 1;
             return new javafx.beans.property.SimpleStringProperty(String.valueOf(index));
         });
 
-// Permitir edición en la columna
         positionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         positionColumn.setOnEditCommit(event -> {
             // Obtén el Driver de la fila editada
@@ -97,7 +94,6 @@ public class GridController {
         nameColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getName() + " " + cellData.getValue().getSurname()));
         teamColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTeam().getName()));
 
-        // Establecer estilos de filas con colores de equipo
         gridTableView.setRowFactory(tv -> new TableRow<Driver>() {
             @Override
             protected void updateItem(Driver driver, boolean empty) {
@@ -132,68 +128,110 @@ public class GridController {
 
 
     public void loadGridData(CarRace carRace) {
-        this.selectedCarRace = carRace;  // Guardar la carrera seleccionada
+        this.selectedCarRace = carRace;
 
         raceIdField.setText(String.valueOf(carRace.getId()));
 
-        List<Driver> drivers = driverDAO.findDriversByRaceId(carRace.getId());
+        try {
+            StartingGrid savedGrid = startingGridDAO.findGridByRaceId(carRace.getId());
 
-        if (drivers.isEmpty()) {
-            showAlert("Información", "No hay drivers para esta carrera.", Alert.AlertType.INFORMATION);
-            return;
+            if (savedGrid != null && savedGrid.getGridPositions() != null && !savedGrid.getGridPositions().isEmpty()) {
+                List<Driver> drivers = new ArrayList<>();
+                for (GridPosition position : savedGrid.getGridPositions()) {
+                    Driver driver = driverDAO.findDriverByDni(position.getDriverDni()); // Asumiendo que tienes un método findDriverByDni
+                    if (driver != null) {
+                        drivers.add(driver);
+                    }
+                }
+
+                ObservableList<Driver> observableDrivers = FXCollections.observableArrayList(drivers);
+                gridTableView.setItems(observableDrivers);
+
+            } else {
+                List<Driver> drivers = driverDAO.findDriversByRaceId(carRace.getId());
+
+                if (drivers.isEmpty()) {
+                    showAlert("Info", "There are no drivers for this race.", Alert.AlertType.INFORMATION);
+                    return;
+                }
+
+                Collections.shuffle(drivers);
+
+                ObservableList<Driver> observableDrivers = FXCollections.observableArrayList(drivers);
+                gridTableView.setItems(observableDrivers);
+
+                StartingGrid startingGrid = new StartingGrid();
+                startingGrid.setRaceId(carRace.getId());
+
+                for (int i = 0; i < drivers.size(); i++) {
+                    Driver driver = drivers.get(i);
+                    GridPosition gridPosition = new GridPosition(i + 1, driver.getDni(), driver.getTeam().getId());
+                    startingGrid.addGridPosition(gridPosition);
+                }
+
+                startingGridDAO.save(startingGrid);
+
+                showAlert("Success", "No grid was found for this race. A new random grid has been generated and saved.", Alert.AlertType.INFORMATION);
+            }
+
+        } catch (SQLException e) {
+            showAlert("Error", "An error occurred while loading the grid: " + e.getMessage(), Alert.AlertType.ERROR);
         }
-
-        Collections.shuffle(drivers);
-
-        // Actualizar la tabla con los pilotos
-        ObservableList<Driver> observableDrivers = FXCollections.observableArrayList(drivers);
-        gridTableView.setItems(observableDrivers);
     }
+
 
     @FXML
     public void handleGenerateGrid() {
         String raceIdText = raceIdField.getText();
-
-        if (raceIdText.isEmpty()) {
-            showAlert("Error", "Por favor ingrese un Race ID.", Alert.AlertType.ERROR);
-            return;
-        }
 
         try {
             int raceId = Integer.parseInt(raceIdText);
             List<Driver> drivers = driverDAO.findDriversByRaceId(raceId);
 
             if (drivers.isEmpty()) {
-                showAlert("Información", "No hay drivers para esta carrera.", Alert.AlertType.INFORMATION);
+                showAlert("Info", "There are no drivers for this race.", Alert.AlertType.INFORMATION);
                 return;
             }
 
-            // Mezclar la lista para generar el grid aleatorio
             Collections.shuffle(drivers);
 
-            // Actualizar la tabla
             ObservableList<Driver> observableDrivers = FXCollections.observableArrayList(drivers);
             gridTableView.setItems(observableDrivers);
 
+            StartingGrid startingGrid = new StartingGrid();
+            startingGrid.setRaceId(raceId);
+
+            for (int i = 0; i < drivers.size(); i++) {
+                Driver driver = drivers.get(i);
+                GridPosition gridPosition = new GridPosition(i + 1, driver.getDni(), driver.getTeam().getId());
+                startingGrid.addGridPosition(gridPosition);
+            }
+
+            startingGridDAO.save(startingGrid);
+
+            showAlert("Success", "Grid generated and saved successfully.", Alert.AlertType.INFORMATION);
+
         } catch (NumberFormatException e) {
-            showAlert("Error", "Race ID debe ser un número.", Alert.AlertType.ERROR);
+            showAlert("Error", "Invalid race ID. Please enter a valid number.", Alert.AlertType.ERROR);
+        } catch (SQLException e) {
+            showAlert("Error", "An error occurred while saving the grid: " + e.getMessage(), Alert.AlertType.ERROR);
         } catch (Exception e) {
-            showAlert("Error", "Ocurrió un error al generar la parrilla: " + e.getMessage(), Alert.AlertType.ERROR);
+            showAlert("Error", "An unexpected error occurred: " + e.getMessage(), Alert.AlertType.ERROR);
         }
     }
+
 
     @FXML
     private void exportGridToFile() {
         if (gridTableView.getItems().isEmpty()) {
-            showAlert("Error", "No hay datos en el grid para exportar.", Alert.AlertType.ERROR);
+            showAlert("Error", "", Alert.AlertType.ERROR);
             return;
         }
 
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Guardar lista del Grid");
-        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos de texto", "*.txt"));
+        fileChooser.setTitle("");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter(" ", "*.txt"));
 
-        // Mostrar el diálogo para seleccionar dónde guardar el archivo
         File file = fileChooser.showSaveDialog(gridTableView.getScene().getWindow());
         if (file != null) {
             saveGridToFile(file);
@@ -230,17 +268,17 @@ public class GridController {
     public void switchToShowTeams() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("showTeams.fxml"));
-            Parent root = loader.load(); // Carga la interfaz de "showTeams.fxml"
+            Parent root = loader.load();
 
             ShowTeamsController controller = loader.getController();
-            controller.loadTeams(selectedCarRace);  // Aquí pasamos el objeto selectedCarRace
+            controller.loadTeams(selectedCarRace);
 
             Stage stage = (Stage) somePane.getScene().getWindow(); // Asegúrate de reemplazar `somePane` con el nodo adecuado
-            stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
+            stage.getScene().setRoot(root);
 
         } catch (IOException e) {
             e.printStackTrace();
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Hubo un error al cargar la vista de los equipos.", ButtonType.OK);
+            Alert alert = new Alert(Alert.AlertType.ERROR, " ", ButtonType.OK);
             alert.showAndWait();
         }
     }
@@ -249,34 +287,34 @@ public class GridController {
     private void switchToSelectedRace() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("selectedRace.fxml"));
-            Parent root = loader.load(); // Carga la interfaz de "selectedRace.fxml"
+            Parent root = loader.load();
 
             SelectedRaceController controller = loader.getController();
-            controller.initialize(selectedCarRace);  // Pasar el objeto selectedCarRace
+            controller.initialize(selectedCarRace);
 
-            Stage stage = (Stage) somePane.getScene().getWindow(); // Asegúrate de reemplazar `somePane` con el nodo adecuado
-            stage.getScene().setRoot(root); // Cambiar el contenido de la escena principal
+            Stage stage = (Stage) somePane.getScene().getWindow();
+            stage.getScene().setRoot(root);
 
         } catch (IOException e) {
-            throw new RuntimeException("Error cargando el archivo FXML de SelectedRace", e);
+            throw new RuntimeException(" ", e);
         }
     }
     @FXML
     private void switchToPictures() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pictures.fxml"));
-            Parent root = loader.load(); // Carga la interfaz de "pictures.fxml"
+            Parent root = loader.load();
 
             PicturesController controller = loader.getController();
-            controller.loadPictures(selectedCarRace); // Cargar los datos para la vista de Pictures
+            controller.loadPictures(selectedCarRace);
 
             Stage stage = (Stage) somePane.getScene().getWindow();
             stage.getScene().setRoot(root);
 
         } catch (IOException e) {
-            throw new RuntimeException("Error cargando el archivo FXML de PicturesTournament", e);
+            throw new RuntimeException(" ", e);
         } catch (SQLException e) {
-            throw new RuntimeException("Error al interactuar con la base de datos", e);
+            throw new RuntimeException(" ", e);
         }
     }
 

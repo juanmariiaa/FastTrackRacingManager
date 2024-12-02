@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="441.0" prefWidth="420.0" style="-fx-background-color: #911f23;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="103.0" layoutY="95.0" prefHeight="252.0" prefWidth="215.0">
+        <columns>
+          <TableColumn prefWidth="109.0" text="Name" />
+          <TableColumn prefWidth="105.0" text="Participations" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="43.0" fitWidth="82.0" layoutX="170.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo.png" />
+         </image>
+      </ImageView>
+   </children>
+</Pane>

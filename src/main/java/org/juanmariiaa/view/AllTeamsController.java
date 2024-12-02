@@ -146,6 +146,10 @@ public class AllTeamsController implements Initializable {
     private void switchToLogin() throws IOException {
         App.setRoot("login");
     }
+    @FXML
+    private void switchToMostParticipation() throws IOException {
+        App.setRoot("allMostParticipation");
+    }
 
 
     @FXML
