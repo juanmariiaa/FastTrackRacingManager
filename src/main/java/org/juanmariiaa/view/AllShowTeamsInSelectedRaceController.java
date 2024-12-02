@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
  * Controller class for the view that shows all teams in the selected tournament.
  * This class manages the display of teams associated with a specific tournament.
  */
-public class AllShowTeamsInSelectedTournamentController implements Initializable {
+public class AllShowTeamsInSelectedRaceController implements Initializable {
 
     @FXML
     private Label tournamentNameLabel;

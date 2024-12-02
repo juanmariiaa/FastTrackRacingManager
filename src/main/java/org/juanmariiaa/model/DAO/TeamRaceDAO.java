@@ -1,5 +1,6 @@
 package org.juanmariiaa.model.DAO;
 
+import org.juanmariiaa.model.connection.ConnectionManager;
 import org.juanmariiaa.model.domain.RacingTeam;
 
 import java.sql.Connection;

@@ -27,7 +27,7 @@ import java.util.List;
 
 import static javafx.scene.layout.TilePane.setMargin;
 
-public class PicturesTournamentController {
+public class PicturesController {
 
     @FXML
     private TilePane picturesTilePane;

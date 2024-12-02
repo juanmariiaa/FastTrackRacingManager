@@ -1,5 +1,6 @@
 package org.juanmariiaa.model.DAO;
 
+import org.juanmariiaa.model.connection.ConnectionManager;
 import org.juanmariiaa.model.connection.ConnectionMariaDB;
 import org.juanmariiaa.model.domain.*;
 
@@ -25,7 +26,7 @@ public class CarRaceDAO {
     }
 
     public CarRaceDAO() {
-        this.conn = ConnectionMariaDB.getConnection();
+        this.conn = ConnectionManager.getConnection();
         this.teamRaceDAO = new TeamRaceDAO(conn);
     }
 
@@ -118,6 +119,8 @@ public class CarRaceDAO {
             return rs.getInt(1) > 0;
         }
     }
+
+
 
 
     private CarRace carRaceEager(ResultSet resultSet) throws SQLException {

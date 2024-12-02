@@ -135,8 +135,8 @@ public class MyRacesController implements Initializable {
         App.setRoot("finder");
     }
     @FXML
-    private void switchToCreateTournament() throws IOException {
-        App.setRoot("createTournament");
+    private void switchToCreateRace() throws IOException {
+        App.setRoot("createRace");
     }
     @FXML
     private void switchToLogin() throws IOException {

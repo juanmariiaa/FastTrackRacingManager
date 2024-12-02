@@ -122,7 +122,7 @@ public class ShowTeamsController implements Initializable {
             Parent root = loader.load(); // Carga la interfaz de "pictures.fxml"
 
             // Obtener el controlador de la vista de "PicturesTournament"
-            PicturesTournamentController controller = loader.getController();
+            PicturesController controller = loader.getController();
             controller.loadPictures(selectedCarRace); // Cargar los datos para la vista de Pictures
 
             // Cambiar el contenido de la escena principal

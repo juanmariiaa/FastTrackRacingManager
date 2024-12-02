@@ -1,5 +1,6 @@
 package org.juanmariiaa.model.DAO;
 
+import org.juanmariiaa.model.connection.ConnectionManager;
 import org.juanmariiaa.model.connection.ConnectionMariaDB;
 import org.juanmariiaa.model.domain.Driver;
 import org.juanmariiaa.model.domain.GridPosition;
@@ -25,7 +26,7 @@ public class StartingGridDAO {
     }
 
     public StartingGridDAO() {
-        this.conn = ConnectionMariaDB.getConnection();
+        this.conn = ConnectionManager.getConnection();
     }
 
     public void save(StartingGrid startingGrid) throws SQLException {

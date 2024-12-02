@@ -1,5 +1,6 @@
 package org.juanmariiaa.model.DAO;
 
+import org.juanmariiaa.model.connection.ConnectionManager;
 import org.juanmariiaa.model.connection.ConnectionMariaDB;
 import org.juanmariiaa.model.domain.Picture;
 
@@ -23,7 +24,7 @@ public class PictureDAO {
     }
 
     public PictureDAO() {
-        this.conn = ConnectionMariaDB.getConnection();
+        this.conn = ConnectionManager.getConnection();
     }
 
     public List<Picture> getPicturesByRaceId(int raceId) throws SQLException {

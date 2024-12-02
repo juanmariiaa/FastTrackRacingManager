@@ -1,5 +1,6 @@
 package org.juanmariiaa.model.DAO;
 
+import org.juanmariiaa.model.connection.ConnectionManager;
 import org.juanmariiaa.model.connection.ConnectionMariaDB;
 import org.juanmariiaa.model.domain.User;
 
@@ -20,7 +21,7 @@ public class UserDAO {
     }
 
     public UserDAO() {
-        this.conn = ConnectionMariaDB.getConnection();
+        this.conn = ConnectionManager.getConnection();
     }
 
 

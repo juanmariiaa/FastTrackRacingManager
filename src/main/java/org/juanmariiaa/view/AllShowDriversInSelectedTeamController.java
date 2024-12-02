@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
  * Controller class for the view that shows participants in the selected team.
  * This class manages the display of team name.
  */
-public class AllShowParticipantsInSelectedTeamController implements Initializable {
+public class AllShowDriversInSelectedTeamController implements Initializable {
 
     @FXML
     private Label teamNameLabel;

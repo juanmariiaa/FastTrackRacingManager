@@ -48,6 +48,6 @@
          </children>
       </Pane>
       <Button layoutX="572.0" layoutY="429.0" mnemonicParsing="false" onAction="#selectTournament" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Select Race" textFill="WHITE" />
-      <Button layoutX="341.0" layoutY="429.0" mnemonicParsing="false" onAction="#switchToCreateTournament" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Create Car Race" textFill="WHITE" />
+      <Button layoutX="341.0" layoutY="429.0" mnemonicParsing="false" onAction="#switchToCreateRace" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Create Car Race" textFill="WHITE" />
    </children>
 </Pane>

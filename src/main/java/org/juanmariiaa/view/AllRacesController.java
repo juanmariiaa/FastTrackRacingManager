@@ -35,7 +35,7 @@ import java.util.ResourceBundle;
  * This class manages the display and editing of tournament information in a TableView,
  * as well as navigation to different views and delete of selected tournaments.
  */
-public class AllTournamentsController implements Initializable {
+public class AllRacesController implements Initializable {
 
     @FXML
     private TableView<CarRace> tableView;
@@ -214,7 +214,7 @@ public class AllTournamentsController implements Initializable {
         if (selectedCarRace != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("allShowTeamsInSelectedRaces.fxml"));
             Parent root = loader.load();
-            AllShowTeamsInSelectedTournamentController controller = loader.getController();
+            AllShowTeamsInSelectedRaceController controller = loader.getController();
             controller.show(selectedCarRace);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -235,7 +235,7 @@ public class AllTournamentsController implements Initializable {
         if (selectedCarRace != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("allAddRemoveTeamFromRace.fxml"));
             Parent root = loader.load();
-            AllAddRemoveTeamsTournamentController controller = loader.getController();
+            AllAddRemoveTeamsRacesController controller = loader.getController();
             controller.show(selectedCarRace);
             Scene scene = new Scene(root);
             Stage stage = new Stage();

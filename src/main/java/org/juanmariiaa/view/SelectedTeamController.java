@@ -5,7 +5,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -16,30 +15,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.ByteArrayInputStream;
 
-import javafx.scene.layout.TilePane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.juanmariiaa.model.DAO.DriverDAO;
 import org.juanmariiaa.model.DAO.RacingTeamDAO;
-import org.juanmariiaa.model.domain.CarRace;
 import org.juanmariiaa.model.domain.Driver;
-import org.juanmariiaa.model.domain.Picture;
 import org.juanmariiaa.model.domain.RacingTeam;
 import org.juanmariiaa.model.enums.Gender;
 import org.juanmariiaa.model.enums.Role;
 import org.juanmariiaa.utils.Utils;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import static javafx.scene.layout.TilePane.setMargin;
-
 /**
  * Controller class for displaying and managing details of a selected team.
- * This controller handles updating team details, displaying associated participants
- * and creating new participants for this selected tournament.
+ * This controller handles updating team details, displaying associated drivers
+ * and creating new drivers for this selected tournament.
  */
 public class SelectedTeamController {
 
@@ -65,13 +58,11 @@ public class SelectedTeamController {
     private TableColumn<Driver, Gender> columnGender;
     @FXML
     private ImageView logoImageView;
-    @FXML
-    private TilePane picturesTilePane;
 
     private RacingTeam selectedRacingTeam;
     private DriverDAO driverDAO;
     private RacingTeamDAO racingTeamDAO;
-    private ObservableList<Driver> participantsData;
+    private ObservableList<Driver> driversData;
 
     public void initialize(RacingTeam selectedRacingTeam) throws SQLException {
         this.selectedRacingTeam = selectedRacingTeam;
@@ -87,23 +78,12 @@ public class SelectedTeamController {
     }
 
     public void displayLogo() throws SQLException {
-        // Obtener los datos binarios del logo del equipo utilizando el RacingTeamDAO
         byte[] logoImageData = racingTeamDAO.getImageDataByTeamId(selectedRacingTeam.getId());
 
-        // Verificamos si los datos de la imagen no son nulos y tienen contenido
         if (logoImageData != null && logoImageData.length > 0) {
-            // Crear una imagen a partir de los datos binarios
             Image logoImage = new Image(new ByteArrayInputStream(logoImageData));
 
-            // Establecer la imagen en el ImageView (suponiendo que logoImageView es tu ImageView en el FXML)
             logoImageView.setImage(logoImage);
-        } else {
-            // Si no hay logo, mostramos una alerta
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Logo no disponible");
-            alert.setHeaderText(null);
-            alert.setContentText("El logo del equipo no está disponible.");
-            alert.showAndWait();
         }
     }
 
@@ -112,9 +92,9 @@ public class SelectedTeamController {
 
     private void displayParticipants() {
         List<Driver> drivers = driverDAO.findDriversByTeam(selectedRacingTeam.getId());
-        participantsData = FXCollections.observableArrayList(drivers);
+        driversData = FXCollections.observableArrayList(drivers);
 
-        tableView.setItems(this.participantsData);
+        tableView.setItems(this.driversData);
         tableView.setEditable(true);
         columnDNI.setCellValueFactory(new PropertyValueFactory<>("dni"));
         columnDNI.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -122,7 +102,7 @@ public class SelectedTeamController {
             Driver driver = p.getRowValue();
             driver.setDni(p.getNewValue());
             driverDAO.update(driver);
-            participantsData.set(tableView.getSelectionModel().getSelectedIndex(), driver);
+            driversData.set(tableView.getSelectionModel().getSelectedIndex(), driver);
             tableView.refresh();
         });
 
@@ -141,17 +121,17 @@ public class SelectedTeamController {
             Driver driver = p.getRowValue();
             driver.setSurname(p.getNewValue());
             driverDAO.update(driver);
-            participantsData.set(tableView.getSelectionModel().getSelectedIndex(), driver);
+            driversData.set(tableView.getSelectionModel().getSelectedIndex(), driver);
             tableView.refresh();
         });
 
-        columnAge.setCellValueFactory(participant -> new SimpleStringProperty(Integer.toString(participant.getValue().getAge())));
+        columnAge.setCellValueFactory(driver -> new SimpleStringProperty(Integer.toString(driver.getValue().getAge())));
         columnAge.setCellFactory(TextFieldTableCell.forTableColumn());
         columnAge.setOnEditCommit(p -> {
             Driver driver = p.getRowValue();
             driver.setAge(Integer.parseInt(p.getNewValue()));
             driverDAO.update(driver);
-            participantsData.set(tableView.getSelectionModel().getSelectedIndex(), driver);
+            driversData.set(tableView.getSelectionModel().getSelectedIndex(), driver);
             tableView.refresh();
         });
 
@@ -161,7 +141,7 @@ public class SelectedTeamController {
             Driver driver = p.getRowValue();
             driver.setRole(p.getNewValue());
             driverDAO.update(driver);
-            participantsData.set(tableView.getSelectionModel().getSelectedIndex(), driver);
+            driversData.set(tableView.getSelectionModel().getSelectedIndex(), driver);
             tableView.refresh();
         });
 
@@ -171,7 +151,7 @@ public class SelectedTeamController {
             Driver driver = p.getRowValue();
             driver.setGender(p.getNewValue());
             driverDAO.update(driver);
-            participantsData.set(tableView.getSelectionModel().getSelectedIndex(), driver);
+            driversData.set(tableView.getSelectionModel().getSelectedIndex(), driver);
             tableView.refresh();
         });
     }
@@ -199,20 +179,20 @@ public class SelectedTeamController {
             driverDAO.delete(selectedP.getDni());
             Utils.showPopUp("DELETE", "Participant deleted", "Participant has been deleted.", Alert.AlertType.INFORMATION);
         } else {
-            Utils.showPopUp("ERROR", "No Participant Selected", "Please select a participant to delete.", Alert.AlertType.ERROR);
+            Utils.showPopUp("ERROR", "No Participant Selected", "Please select a driver to delete.", Alert.AlertType.ERROR);
         }
     }
 
     @FXML
-    private void switchToCreateParticipant() {
+    private void switchToCreateDriver() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("CreateParticipant.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("createDriver.fxml"));
             Parent root = loader.load();
-            CreateParticipantController controller = loader.getController();
+            CreateDriverController controller = loader.getController();
             controller.setSelectedTeam(selectedRacingTeam);
             Stage stage = new Stage();
             stage.setScene(new Scene(root));
-            stage.setTitle("Create Participant");
+            stage.setTitle("Create Driver");
             stage.initModality(Modality.APPLICATION_MODAL);
             stage.showAndWait();
             displayParticipants();

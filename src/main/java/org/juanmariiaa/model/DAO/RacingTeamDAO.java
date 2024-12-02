@@ -1,5 +1,6 @@
 package org.juanmariiaa.model.DAO;
 
+import org.juanmariiaa.model.connection.ConnectionManager;
 import org.juanmariiaa.model.connection.ConnectionMariaDB;
 import org.juanmariiaa.model.domain.RacingTeam;
 import org.juanmariiaa.model.domain.User;
@@ -35,7 +36,7 @@ public class RacingTeamDAO {
     }
 
     public RacingTeamDAO() {
-        this.conn = ConnectionMariaDB.getConnection();
+        this.conn = ConnectionManager.getConnection();
     }
 
     public List<RacingTeam> findAll(int userId) throws SQLException {

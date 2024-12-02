@@ -25,7 +25,7 @@ import java.util.ResourceBundle;
  * Controller class for the view that allows adding or removing teams from a selected tournament.
  * This class manages the display and modification of teams associated with a tournament.
  */
-public class AllAddRemoveTeamsTournamentController implements Initializable {
+public class AllAddRemoveTeamsRacesController implements Initializable {
 
     @FXML
     private ListView<String> teamListView;

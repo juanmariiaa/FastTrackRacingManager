@@ -50,7 +50,7 @@
             <Font size="11.0" />
          </font>
       </Text>
-      <Button layoutX="392.0" layoutY="502.0" mnemonicParsing="false" onAction="#switchToCreateParticipant" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Create a Driver" textFill="WHITE" />
+      <Button layoutX="392.0" layoutY="502.0" mnemonicParsing="false" onAction="#switchToCreateDriver" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #911f23;" text="Create a Driver" textFill="WHITE" />
       <Text layoutX="311.0" layoutY="262.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Institution:">
          <font>
             <Font size="18.0" />

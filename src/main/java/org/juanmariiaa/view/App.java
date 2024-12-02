@@ -24,7 +24,7 @@ public class App extends Application {
         Image icon = new Image(getClass().getResourceAsStream("/org/juanmariiaa/Images/logo-no-bg.png"));
         primaryStage.getIcons().add(icon);
 
-        scene = new Scene(loadFXML("login"), 308, 411);
+        scene = new Scene(loadFXML("start"), 308, 411);
 
         stage.setScene(scene);
         stage.setResizable(false);

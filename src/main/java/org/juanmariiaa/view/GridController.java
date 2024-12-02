@@ -267,7 +267,7 @@ public class GridController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("pictures.fxml"));
             Parent root = loader.load(); // Carga la interfaz de "pictures.fxml"
 
-            PicturesTournamentController controller = loader.getController();
+            PicturesController controller = loader.getController();
             controller.loadPictures(selectedCarRace); // Cargar los datos para la vista de Pictures
 
             Stage stage = (Stage) somePane.getScene().getWindow();

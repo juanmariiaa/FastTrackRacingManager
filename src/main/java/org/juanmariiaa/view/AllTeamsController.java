@@ -154,7 +154,7 @@ public class AllTeamsController implements Initializable {
         if (selectedRacingTeam != null) {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("allShowDriversInSelectedTeam.fxml"));
             Parent root = loader.load();
-            AllShowParticipantsInSelectedTeamController controller = loader.getController();
+            AllShowDriversInSelectedTeamController controller = loader.getController();
             controller.show(selectedRacingTeam);
             Scene scene = new Scene(root);
             Stage stage = new Stage();

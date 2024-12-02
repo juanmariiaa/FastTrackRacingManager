@@ -24,7 +24,7 @@ import java.util.List;
  *
  * @throws SQLException if an error occurs while creating the team
  */
-public class CreateTournamentController {
+public class CreateRaceController {
     @FXML
     private TextField tfName;
     @FXML

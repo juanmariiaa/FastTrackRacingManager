@@ -27,7 +27,7 @@ import java.util.ResourceBundle;
  *
  * @throws SQLException if an error occurs while creating the team
  */
-public class CreateParticipantController implements Initializable {
+public class CreateDriverController implements Initializable {
     @FXML
     private TextField dniField;
     @FXML

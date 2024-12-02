@@ -1,5 +1,6 @@
 package org.juanmariiaa.model.DAO;
 
+import org.juanmariiaa.model.connection.ConnectionManager;
 import org.juanmariiaa.model.connection.ConnectionMariaDB;
 import org.juanmariiaa.model.domain.Driver;
 import org.juanmariiaa.model.domain.User;
@@ -31,7 +32,7 @@ public class DriverDAO {
     }
 
     public DriverDAO() {
-        this.conn = ConnectionMariaDB.getConnection();
+        this.conn = ConnectionManager.getConnection();
     }
 
     public List<Driver> findAll(int userId) {
