@@ -37,23 +37,23 @@
             </Hyperlink>
          </children>
       </Pane>
-      <Text fill="#a1a1a1" layoutX="111.0" layoutY="109.0" onMouseClicked="#switchToSelectedRace" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary">
+      <Text fill="#a1a1a1" layoutX="113.0" layoutY="102.0" onMouseClicked="#switchToSelectedRace" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Separator layoutX="-8.0" layoutY="116.0" prefHeight="19.0" prefWidth="782.0" />
-      <Text fill="#a1a1a1" layoutX="286.0" layoutY="108.0" onMouseClicked="#switchToShowTeams" strokeType="OUTSIDE" strokeWidth="0.0" text="Teams">
+      <Separator layoutX="-6.0" layoutY="109.0" prefHeight="19.0" prefWidth="782.0" />
+      <Text fill="#a1a1a1" layoutX="288.0" layoutY="101.0" onMouseClicked="#switchToShowTeams" strokeType="OUTSIDE" strokeWidth="0.0" text="Teams">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <Text fill="#a1a1a1" layoutX="455.0" layoutY="108.0" onMouseClicked="#switchToPictures" strokeType="OUTSIDE" strokeWidth="0.0" text="Pictures">
+      <Text fill="#a1a1a1" layoutX="457.0" layoutY="101.0" onMouseClicked="#switchToPictures" strokeType="OUTSIDE" strokeWidth="0.0" text="Pictures">
          <font>
             <Font size="18.0" />
          </font>
       </Text>
-      <ImageView fitHeight="24.0" fitWidth="40.0" layoutX="35.0" layoutY="77.0" onMouseClicked="#switchToMyRaces" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="24.0" fitWidth="40.0" layoutX="37.0" layoutY="70.0" onMouseClicked="#switchToMyRaces" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/back.png" />
          </image>
@@ -74,7 +74,7 @@
          </content>
       </ScrollPane>
       <TextField fx:id="raceIdField" layoutX="-220.0" layoutY="135.0" />
-      <Text layoutX="634.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grid">
+      <Text layoutX="636.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Grid">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

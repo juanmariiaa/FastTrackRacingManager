@@ -198,8 +198,8 @@ public class PicturesTournamentController {
         App.setRoot("login");
     }
     @FXML
-    private void switchToMyTournament() throws IOException {
-        App.setRoot("myTournaments");
+    private void switchToMyRaces() throws IOException {
+        App.setRoot("myRaces");
     }
 
     @FXML

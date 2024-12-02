@@ -47,8 +47,6 @@ public class SelectedRaceController {
     private Pane somePane; // Este es el Pane donde se cargará el nuevo contenido
 
     private User currentUser;
-
-
     private CarRace selectedCarRace;
 
     private CarRaceDAO carRaceDAO;

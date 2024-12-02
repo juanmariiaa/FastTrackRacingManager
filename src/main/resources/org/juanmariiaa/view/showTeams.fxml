@@ -67,7 +67,7 @@
          </font>
       </Text>
       <Separator layoutX="2.0" layoutY="108.0" prefHeight="19.0" prefWidth="782.0" />
-      <Text layoutX="296.0" layoutY="100.0" onMouseClicked="#switchToShowTeams" strokeType="OUTSIDE" strokeWidth="0.0" text="Teams">
+      <Text layoutX="296.0" layoutY="100.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teams">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
