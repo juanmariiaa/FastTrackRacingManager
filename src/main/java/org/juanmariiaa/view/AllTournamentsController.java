@@ -180,11 +180,15 @@ public class AllTournamentsController implements Initializable {
     }
 
     @FXML
-    private void switchToParticipant() throws IOException {
-        App.setRoot("allParticipants");
+    private void switchToDriver() throws IOException {
+        App.setRoot("allDrivers");
     }
     @FXML
-    private void switchToTeam() throws IOException {
+    private void switchToRaces() throws IOException {
+        App.setRoot("allRaces");
+    }
+    @FXML
+    private void switchToTeams() throws IOException {
         App.setRoot("allTeams");
     }
     @FXML
@@ -208,7 +212,7 @@ public class AllTournamentsController implements Initializable {
     private void switchToShowTeamsInSelectedTournament() throws IOException {
         CarRace selectedCarRace = tableView.getSelectionModel().getSelectedItem();
         if (selectedCarRace != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("allShowTeamsInSelectedTournament.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("allShowTeamsInSelectedRaces.fxml"));
             Parent root = loader.load();
             AllShowTeamsInSelectedTournamentController controller = loader.getController();
             controller.show(selectedCarRace);
@@ -229,7 +233,7 @@ public class AllTournamentsController implements Initializable {
     private void switchToAddRemoveTeamToTournament() throws IOException {
         CarRace selectedCarRace = tableView.getSelectionModel().getSelectedItem();
         if (selectedCarRace != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("allAddRemoveTeamFromTournament.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("allAddRemoveTeamFromRace.fxml"));
             Parent root = loader.load();
             AllAddRemoveTeamsTournamentController controller = loader.getController();
             controller.show(selectedCarRace);

@@ -32,7 +32,7 @@
             <Font size="42.0" />
          </font>
       </Text>
-      <Button layoutX="226.0" layoutY="134.0" mnemonicParsing="false" onAction="#switchToTournaments" prefHeight="39.0" prefWidth="339.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" text="Races" textAlignment="CENTER">
+      <Button layoutX="226.0" layoutY="134.0" mnemonicParsing="false" onAction="#switchToRaces" prefHeight="39.0" prefWidth="339.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" text="Races" textAlignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>
@@ -48,7 +48,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button layoutX="226.0" layoutY="260.0" mnemonicParsing="false" onAction="#switchToParticipants" prefHeight="39.0" prefWidth="339.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" text="Drivers" textAlignment="CENTER">
+      <Button layoutX="226.0" layoutY="260.0" mnemonicParsing="false" onAction="#switchToDriver" prefHeight="39.0" prefWidth="339.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" text="Drivers" textAlignment="CENTER">
          <opaqueInsets>
             <Insets />
          </opaqueInsets>

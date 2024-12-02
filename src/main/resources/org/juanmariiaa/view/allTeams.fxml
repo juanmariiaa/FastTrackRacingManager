@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="774.0" style="-fx-background-color: #0e76a8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.AllTeamsController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="774.0" style="-fx-background-color: #911f23;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.AllTeamsController">
    <children>
       <TableView fx:id="tableView" editable="true" layoutX="63.0" layoutY="149.0" prefHeight="248.0" prefWidth="648.0">
          <columns>
@@ -28,35 +28,40 @@
             <Font size="28.0" />
          </font>
       </Text>
-      <ImageView fitHeight="81.0" fitWidth="58.0" layoutX="339.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="81.0" fitWidth="58.0" layoutX="347.0" layoutY="19.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../../IdeaProjects/TournamentManager/src/main/resources/org/juanmariiaa/Images/logo-no-bg.png" />
+            <Image url="@../images/logo.png" />
          </image>
       </ImageView>
-      <Button layoutX="661.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToLogin" style="-fx-background-color: #fdfdf3; -fx-background-radius: 20;" text="Sign Out" />
+      <Button layoutX="681.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToLogin" style="-fx-background-color: #fdfdf3; -fx-background-radius: 20;" text="Sign Out" />
       <ImageView fitHeight="39.0" fitWidth="59.0" layoutX="25.0" layoutY="75.0" onMouseClicked="#switchToFinder" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../Images/back.png" />
          </image>
       </ImageView>
-      <Hyperlink layoutX="72.0" layoutY="20.0" onAction="#switchToTournaments" text="Tournaments" textFill="#a6fffe">
+      <Hyperlink layoutX="74.0" layoutY="20.0" onAction="#switchToRaces" text="Races" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Hyperlink>
-      <Hyperlink layoutX="204.0" layoutY="20.0" onAction="#switchToParticipant" text="Participants" textFill="#a6fffe">
+      <Hyperlink layoutX="254.0" layoutY="20.0" onAction="#switchToDriver" text="Drivers" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Hyperlink>
-      <Hyperlink layoutX="447.0" layoutY="19.0" onAction="#switchToFinder" text="Finder" textFill="#a6fffe">
+      <Hyperlink layoutX="463.0" layoutY="19.0" onAction="#switchToFinder" text="Finder" textFill="WHITE">
          <font>
             <Font size="15.0" />
          </font>
       </Hyperlink>
-      <Hyperlink layoutX="560.0" layoutY="20.0" onAction="#switchToHome" text="Home" textFill="#a6fffe">
+      <Hyperlink layoutX="555.0" layoutY="20.0" onAction="#switchToHome" text="Home" textFill="WHITE">
          <font>
             <Font size="15.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="162.0" layoutY="20.0" onAction="#switchToTeams" text="Teams" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
          </font>
       </Hyperlink>
    </children>

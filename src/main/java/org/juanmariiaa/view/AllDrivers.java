@@ -32,7 +32,7 @@ import java.util.ResourceBundle;
  * This class manages the display and editing of participation information in a TableView,
  * as well as navigation to different views and delete of selected tournaments.
  */
-public class AllParticipantsController implements Initializable {
+public class AllDrivers implements Initializable {
 
     @FXML
     private TableView<Driver> tableView;
@@ -173,12 +173,16 @@ public class AllParticipantsController implements Initializable {
     }
 
     @FXML
-    private void switchToTeam() throws IOException {
-        App.setRoot("allTeams");
+    private void switchToDriver() throws IOException {
+        App.setRoot("allDrivers");
     }
     @FXML
-    private void switchToTournaments() throws IOException {
-        App.setRoot("allTournaments");
+    private void switchToRaces() throws IOException {
+        App.setRoot("allRaces");
+    }
+    @FXML
+    private void switchToTeams() throws IOException {
+        App.setRoot("allTeams");
     }
     @FXML
     private void switchToHome() throws IOException {

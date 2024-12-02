@@ -123,12 +123,16 @@ public class AllTeamsController implements Initializable {
         deleteSelected();
     }
     @FXML
-    private void switchToParticipant() throws IOException {
-        App.setRoot("allParticipants");
+    private void switchToDriver() throws IOException {
+        App.setRoot("allDrivers");
     }
     @FXML
-    private void switchToTournaments() throws IOException {
-        App.setRoot("allTournaments");
+    private void switchToRaces() throws IOException {
+        App.setRoot("allRaces");
+    }
+    @FXML
+    private void switchToTeams() throws IOException {
+        App.setRoot("allTeams");
     }
     @FXML
     private void switchToHome() throws IOException {
@@ -148,7 +152,7 @@ public class AllTeamsController implements Initializable {
     private void switchToShowParticipantsInSelectedTeam() throws IOException {
         RacingTeam selectedRacingTeam = tableView.getSelectionModel().getSelectedItem();
         if (selectedRacingTeam != null) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("allShowParticipantsInSelectedTeam.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("allShowDriversInSelectedTeam.fxml"));
             Parent root = loader.load();
             AllShowParticipantsInSelectedTeamController controller = loader.getController();
             controller.show(selectedRacingTeam);

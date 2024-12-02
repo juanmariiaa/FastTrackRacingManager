@@ -10,12 +10,12 @@ import java.io.IOException;
 public class FinderController {
 
     @FXML
-    private void switchToTournaments() throws IOException {
-        App.setRoot("allTournaments");
+    private void switchToDriver() throws IOException {
+        App.setRoot("allDrivers");
     }
     @FXML
-    private void switchToParticipants() throws IOException {
-        App.setRoot("allParticipants");
+    private void switchToRaces() throws IOException {
+        App.setRoot("allRaces");
     }
     @FXML
     private void switchToTeams() throws IOException {
@@ -24,6 +24,10 @@ public class FinderController {
     @FXML
     private void switchToHome() throws IOException {
         App.setRoot("home");
+    }
+    @FXML
+    private void switchToFinder() throws IOException {
+        App.setRoot("finder");
     }
     @FXML
     private void switchToLogin() throws IOException {

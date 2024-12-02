@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -61,11 +62,38 @@ public class GridController {
 
     @FXML
     public void initialize() {
-        // Inicializar las columnas de la tabla
+        // Inicializar la tabla como editable
+        gridTableView.setEditable(true);
         positionColumn.setCellValueFactory(cellData -> {
             int index = gridTableView.getItems().indexOf(cellData.getValue()) + 1;
             return new javafx.beans.property.SimpleStringProperty(String.valueOf(index));
         });
+
+// Permitir edición en la columna
+        positionColumn.setCellFactory(TextFieldTableCell.forTableColumn());
+        positionColumn.setOnEditCommit(event -> {
+            // Obtén el Driver de la fila editada
+            Driver driver = event.getRowValue();
+            try {
+                // Actualiza la posición con el nuevo valor
+                int newPosition = Integer.parseInt(event.getNewValue());
+                ObservableList<Driver> drivers = gridTableView.getItems();
+
+                if (newPosition > 0 && newPosition <= drivers.size()) {
+                    // Cambia la posición del Driver en la lista
+                    drivers.remove(driver); // Quita al driver de la lista
+                    drivers.add(newPosition - 1, driver); // Lo agrega en la nueva posición
+
+                    // Actualiza la tabla para reflejar el cambio
+                    gridTableView.setItems(FXCollections.observableArrayList(drivers));
+                } else {
+                    showAlert("Error", "La posición debe estar entre 1 y " + drivers.size(), Alert.AlertType.ERROR);
+                }
+            } catch (NumberFormatException e) {
+                showAlert("Error", "La posición debe ser un número válido.", Alert.AlertType.ERROR);
+            }
+        });
+
         nameColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getName() + " " + cellData.getValue().getSurname()));
         teamColumn.setCellValueFactory(cellData -> new javafx.beans.property.SimpleStringProperty(cellData.getValue().getTeam().getName()));
 

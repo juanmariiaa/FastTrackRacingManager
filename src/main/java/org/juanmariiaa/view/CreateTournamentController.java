@@ -99,7 +99,7 @@ public class CreateTournamentController {
                 tfCity.clear();
                 dtDate.getEditor().clear();
                 lvTeams.getSelectionModel().clearSelection();
-                switchToMyTournament();
+                switchToMyRaces();
 
                 Utils.showPopUp("Tournament Created", null, "Tournament has been created successfully.", Alert.AlertType.INFORMATION);
             } catch (SQLException e) {
@@ -119,8 +119,8 @@ public class CreateTournamentController {
         App.setRoot("home");
     }
     @FXML
-    private void switchToMyTournament() throws IOException {
-        App.setRoot("myTournaments");
+    private void switchToMyRaces() throws IOException {
+        App.setRoot("myRaces");
     }
     @FXML
     private void switchToFinder() throws IOException {
