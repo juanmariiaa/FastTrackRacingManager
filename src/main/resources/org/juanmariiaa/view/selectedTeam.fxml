@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="562.0" prefWidth="882.0" style="-fx-background-color: #fdfdf3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.SelectedTeamController">
+   <children>
+      <Pane prefHeight="58.0" prefWidth="882.0" style="-fx-background-color: #0e76a8;">
+         <children>
+            <ImageView fitHeight="58.0" fitWidth="59.0" layoutX="422.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/logo-no-bg.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Text layoutX="324.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To update, double click the field you wish to modify." />
+      <Text layoutX="350.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SELECTED TEAM">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </Text>
+      <Text layoutX="63.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="61.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nameField" layoutX="191.0" layoutY="186.0" style="-fx-background-color: DDDDDD;" />
+      <TextField fx:id="cityField" layoutX="191.0" layoutY="239.0" style="-fx-background-color: DDDDDD;" />
+      <Text layoutX="386.0" layoutY="154.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Participants:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="389.0" layoutY="171.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To modify a driver, double-click the field you want to change.">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Text>
+      <Button layoutX="392.0" layoutY="502.0" mnemonicParsing="false" onAction="#switchToCreateParticipant" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Create a Participant" textFill="WHITE" />
+      <Text layoutX="61.0" layoutY="311.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Institution:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="institutionField" layoutX="191.0" layoutY="292.0" style="-fx-background-color: DDDDDD;" />
+      <TableView fx:id="tableView" editable="true" layoutX="379.0" layoutY="197.0" prefHeight="229.0" prefWidth="476.0">
+         <columns>
+            <TableColumn fx:id="columnDNI" prefWidth="113.27352905273438" text="DNI" />
+            <TableColumn fx:id="columnName" prefWidth="91.72650146484375" text="Name" />
+            <TableColumn fx:id="columnSurname" minWidth="0.0" prefWidth="85.01898193359375" text="Surname" />
+            <TableColumn fx:id="columnAge" prefWidth="42.35546875" text="Age" />
+            <TableColumn fx:id="columnRole" prefWidth="61.3994140625" text="Role" />
+            <TableColumn fx:id="columnGender" prefWidth="82.0284423828125" text="Gender" />
+         </columns>
+      </TableView>
+      <Hyperlink layoutX="721.0" layoutY="178.0" onAction="#deleteSelected" text="delete selected.">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Hyperlink>
+      <Text layoutX="390.0" layoutY="190.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To delete a driver, select the driver you want to delete and click ">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Text>
+      <Button layoutX="197.0" layoutY="348.0" mnemonicParsing="false" onAction="#updateTeam" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Update" textFill="WHITE" />
+      <ImageView fitHeight="24.0" fitWidth="40.0" layoutX="52.0" layoutY="88.0" onMouseClicked="#closeWindow" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/back.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="logoImageView" fitHeight="99.0" fitWidth="84.0" layoutX="217.0" layoutY="74.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</Pane>

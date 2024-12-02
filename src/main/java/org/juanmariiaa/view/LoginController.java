@@ -10,7 +10,6 @@ import org.juanmariiaa.utils.Utils;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 /**
  * Controller for the login functionality in the application.
  */

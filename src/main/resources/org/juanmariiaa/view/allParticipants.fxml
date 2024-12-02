@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="489.0" prefWidth="774.0" style="-fx-background-color: #0e76a8;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.AllParticipantsController">
+    <children>
+        <TableView fx:id="tableView" editable="true" layoutX="63.0" layoutY="137.0" prefHeight="248.0" prefWidth="648.0">
+            <columns>
+                <TableColumn fx:id="columnDNI" prefWidth="120.0" text="DNI" />
+                <TableColumn fx:id="columnName" prefWidth="109.0" text="Name" />
+                <TableColumn fx:id="columnSurname" minWidth="0.0" prefWidth="103.0" text="Surname" />
+                <TableColumn fx:id="columnAge" prefWidth="34.0" text="Age" />
+                <TableColumn fx:id="columnRole" prefWidth="84.0" text="Role" />
+                <TableColumn fx:id="columnGender" minWidth="0.0" prefWidth="95.86279296875" text="Gender" />
+            <TableColumn fx:id="columnTeam" prefWidth="101.63720703125" text="Team" />
+            </columns>
+        </TableView>
+        <Text fill="WHITE" layoutX="236.0" layoutY="417.0" strokeType="OUTSIDE" strokeWidth="0.0" text="To update, double click the field you wish to modify." />
+        <Button layoutX="300.0" layoutY="435.0" mnemonicParsing="false" onAction="#btDelete" prefHeight="29.0" prefWidth="175.0" style="-fx-background-radius: 20; -fx-background-color: #fdfdf3;" text="Delete a selected Participant" />
+        <Text fill="WHITE" layoutX="296.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PARTICIPANTS">
+            <font>
+                <Font size="28.0" />
+            </font>
+        </Text>
+      <ImageView fitHeight="81.0" fitWidth="58.0" layoutX="352.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../../../../../../IdeaProjects/TournamentManager/src/main/resources/org/juanmariiaa/Images/logo-no-bg.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="674.0" layoutY="22.0" mnemonicParsing="false" onAction="#switchToLogin" style="-fx-background-color: #fdfdf3; -fx-background-radius: 20;" text="Sign Out" />
+      <ImageView fitHeight="39.0" fitWidth="59.0" layoutX="38.0" layoutY="75.0" onMouseClicked="#switchToFinder" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/back.png" />
+         </image>
+      </ImageView>
+      <Hyperlink layoutX="85.0" layoutY="20.0" onAction="#switchToTournaments" text="Tournaments" textFill="#a6fffe">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="230.0" layoutY="20.0" onAction="#switchToTeam" text="Teams" textFill="#a6fffe">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="460.0" layoutY="19.0" onAction="#switchToFinder" text="Finder" textFill="#a6fffe">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Hyperlink>
+      <Hyperlink layoutX="573.0" layoutY="20.0" onAction="#switchToHome" text="Home" textFill="#a6fffe">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Hyperlink>
+    </children>
+</Pane>

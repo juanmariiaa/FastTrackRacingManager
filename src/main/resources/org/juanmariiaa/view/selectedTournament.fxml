@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="774.0" style="-fx-background-color: #fdfdf3;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.juanmariiaa.view.SelectedTournamentController">
+   <children>
+      <Text layoutX="55.0" layoutY="204.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="53.0" layoutY="250.0" strokeType="OUTSIDE" strokeWidth="0.0" text="City:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="53.0" layoutY="299.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Location:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <TextField fx:id="nameField" layoutX="183.0" layoutY="178.0" style="-fx-background-color: DDDDDD;" />
+      <TextField fx:id="cityField" layoutX="183.0" layoutY="231.0" style="-fx-background-color: DDDDDD;" />
+      <TextField fx:id="locationField" layoutX="183.0" layoutY="279.0" style="-fx-background-color: DDDDDD;" />
+      <ListView fx:id="teamsListView" layoutX="427.0" layoutY="180.0" prefHeight="191.0" prefWidth="292.0" />
+      <Text layoutX="424.0" layoutY="157.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Teams">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button layoutX="318.0" layoutY="446.0" mnemonicParsing="false" onAction="#switchToCreateTeam" prefHeight="29.0" prefWidth="139.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Create a Team" textFill="WHITE" />
+      <Hyperlink layoutX="424.0" layoutY="161.0" onAction="#switchToShowTeams" text="Show Team details.">
+         <font>
+            <Font size="11.0" />
+         </font>
+      </Hyperlink>
+      <Text layoutX="53.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date of start:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <DatePicker fx:id="datePicker" layoutX="183.0" layoutY="326.0" prefHeight="26.0" prefWidth="159.0" style="-fx-background-color: DDDDDD;" />
+      <Button layoutX="207.0" layoutY="371.0" mnemonicParsing="false" onAction="#update" prefHeight="24.0" prefWidth="96.0" style="-fx-background-radius: 20; -fx-background-color: #0e76a8;" text="Update" textFill="WHITE">
+         <font>
+            <Font size="10.0" />
+         </font></Button>
+      <ImageView fitHeight="73.0" fitWidth="24.0" layoutX="695.0" layoutY="152.0" onMouseClicked="#refresh" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/refresh.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="24.0" fitWidth="40.0" layoutX="42.0" layoutY="78.0" onMouseClicked="#switchToMyTournament" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Images/back.png" />
+         </image>
+      </ImageView>
+      <Pane prefHeight="58.0" prefWidth="774.0" style="-fx-background-color: #0e76a8;">
+         <children>
+            <ImageView fitHeight="58.0" fitWidth="59.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Images/logo-no-bg.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="693.0" layoutY="17.0" mnemonicParsing="false" onAction="#switchToLogin" style="-fx-background-color: #fdfdf3; -fx-background-radius: 20;" text="Sign Out" />
+            <Hyperlink layoutX="205.0" layoutY="15.0" onAction="#switchToHome" text="Home" textFill="#a6fffe">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink layoutX="467.0" layoutY="15.0" onAction="#switchToFinder" text="Finder" textFill="#a6fffe">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </Pane>
+      <Button layoutX="487.0" layoutY="414.0" mnemonicParsing="false" onAction="#switchToPictures" prefHeight="29.0" prefWidth="172.0" style="-fx-background-radius: 20; -fx-background-color: DDDDDD;" text="Pictures of the carRace" />
+      <Text layoutX="111.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Summary">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+      <Separator layoutX="-8.0" layoutY="116.0" prefHeight="19.0" prefWidth="782.0" />
+      <Text fill="#a1a1a1" layoutX="331.0" layoutY="108.0" onMouseClicked="#switchToShowTeams" strokeType="OUTSIDE" strokeWidth="0.0" text="Teams">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text fill="#a1a1a1" layoutX="498.0" layoutY="108.0" onMouseClicked="#switchToPictures" strokeType="OUTSIDE" strokeWidth="0.0" text="Pictures">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>
