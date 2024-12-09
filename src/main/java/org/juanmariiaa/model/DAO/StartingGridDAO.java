@@ -15,9 +15,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class StartingGridDAO {
-    private static final String INSERT = "INSERT INTO startingGrid (id_carRace, position, dni_driver, id_racingTeam) \" +\n" +
-            "                \"VALUES (?, ?, ?, ?) \" +\n" +
-            "                \"ON DUPLICATE KEY UPDATE dni_driver = VALUES(dni_driver), id_racingTeam = VALUES(id_racingTeam)";
+    private static final String INSERT =
+            "INSERT INTO startinggrid (id_carRace, position, dni_driver, id_racingTeam)\n" +
+                    "VALUES (?, ?, ?, ?)\n" +
+                    "ON DUPLICATE KEY UPDATE dni_driver = VALUES(dni_driver), id_racingTeam = VALUES(id_racingTeam);\n";
     private static final String DELETE_BY_RACE_ID = "DELETE FROM startingGrid WHERE id_carRace = ?";
     private static final String FINDGRIDBYRACEID = "SELECT * FROM startingGrid WHERE id_carRace = ? ORDER BY position";
 

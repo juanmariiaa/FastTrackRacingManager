@@ -27,11 +27,11 @@ public class ConnectionManager {
                 case SQLITE:
                     return getSQLiteConnection();
                 default:
-                    throw new IllegalStateException("Tipo de base de datos no soportado");
+                    throw new IllegalStateException(" ");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Error al obtener la conexión", e);
+            throw new RuntimeException(" ", e);
         }
     }
 
@@ -44,12 +44,12 @@ public class ConnectionManager {
         try {
             var resource = ConnectionManager.class.getClassLoader().getResource("car_race.sqlite");
             if (resource == null) {
-                throw new RuntimeException("No se encontró el archivo car_race.sqlite en resources");
+                throw new RuntimeException(" ");
             }
             String url = "jdbc:sqlite:" + resource.getPath();
             return DriverManager.getConnection(url);
         } catch (Exception e) {
-            throw new RuntimeException("Error al obtener la conexión SQLite", e);
+            throw new RuntimeException(" ", e);
         }
     }
 
